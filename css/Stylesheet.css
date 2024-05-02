@@ -1,0 +1,147 @@
+body {
+  background-color: #131313;
+}
+
+h3 {
+  margin-top: 70px;
+  margin-bottom: 30px;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, p{
+  color: white;
+}
+
+
+/* Carousel */
+.carousel {
+    width: auto;
+    height: auto;
+
+}
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+.carousel-item {
+    width: 100%;
+    height: 100%;
+}
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carouseltitle{
+    text-align: center;
+    font-size: x-large;
+}
+
+.backg {
+    margin-top: 80px;
+    width: 100%;
+}
+
+.container {
+    white-space: wrap;
+    width: 100%;
+    margin-top: 100px;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container img {
+    display: inline-block;
+    padding: 5px;
+  }
+
+  
+/* game */
+.game-list {
+  display: grid;
+  grid-template-columns: repeat(4, 2fr); /* Mengatur jumlah kolom dalam grid */
+  grid-gap: 20px; /* Mengatur jarak antara elemen-elemen dalam grid */
+  width: 100%; /* Mengatur lebar gambar */
+  height: 100%; /* Mengatur tinggi gambar */
+  margin-top: 80px;
+}
+.game-item {
+  text-align: center;
+}
+.game-item img {
+  width: 100%; /* Mengatur lebar gambar */
+  height: 100%; /* Mengatur tinggi gambar */
+  object-fit: cover;
+  border-radius: 10px; /* Mengatur sudut melengkung pada gambar */
+}
+.game-item h3 {
+  margin-top: 10px; /* Mengatur jarak antara judul dan gambar */
+}
+
+/* card */
+  .card{
+    border: none;
+    background-color: #3a3a3a;
+  }
+
+  .card-title{
+    color: white;
+  }
+  
+
+  /* */
+  #bestgame {
+    padding: 5px;
+  }
+
+
+  /* sidebar */
+  .sidebar {
+    height: 100%;
+    width: 190px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #1e1e1e;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .sidebar a {
+    padding: 20px 20px 20px 20px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+  }
+  
+  .sidebar a:hover {
+    color: #dadada;
+  }
+  
+  .sidebar a.active {
+    background-color: #969696;
+    color: white;
+    border-radius: 15px;
+  }
+  
+  .content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+
+  /* Navbar */
+  .navbar-brand img{
+    width: 100px;
+    height: 50px;
+  }
+
+/* Search */
+  .form-control{
+    width: 200px;
+  }
