@@ -337,3 +337,91 @@ th {
 td {
   padding: 10px;
 }
+
+/* Xpass */
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.info img {
+  width: 600px;
+  height: 320px;
+}
+
+.info h2 {
+  width: 500px;
+  text-align: center;
+  margin-top: -50px;
+}
+
+/* .tombol:hover {
+  background-color: #8d0000;
+} */
+
+.tombol {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #cc0000;
+  background-color: #131313;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  margin: 30px;
+}
+
+.offers-container {
+  margin-top: 50px;
+  width: 100%;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
+  -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
+}
+
+.offers {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: -10px;
+}
+
+.offer {
+  width: 250px;
+  height: 120px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+
+.radio-group button{
+  background-color: #131313; 
+  border: 2px solid red; border-radius: 10px;
+  width: 800px;
+  height: 200px;
+  margin-top: 20px;
+}
+
+.radio-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: white;
+  }
+
+  .radio-group input[type="radio"] {
+  margin-right: 5px;
+  justify-content: start;
+  justify-items: start;
+  align-items: start;
+  align-items: start;
+  }
+
+  .radio-group .description {
+  font-size: 14px;
+  color: #ffffff;
+  }
+

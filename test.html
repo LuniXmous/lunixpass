@@ -11,53 +11,58 @@
     
     <head>
         <style>
-            .profile-picture {
-                width: 100px;
-                height: 100px;
+          .radio-group button{
+            background-color: #131313; 
+            border: 2px solid red; border-radius: 10px;
+            width: 800px;
+            height: 200px;
+          }
+
+          .radio-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: white;
             }
-    
-            .statistics-table {
-                width: 400px;
-                background-color: #FF0000;
-                color: white;
-                text-align: center;
+
+            .radio-group input[type="radio"] {
+            margin-right: 5px;
             }
-    
-            th {
-                padding: 10px;
-            }
-    
-            td {
-                padding: 10px;
+
+            .radio-group .description {
+            font-size: 14px;
+            color: #ffffff;
             }
         </style>
     </head>
     
     <body>
-        <div class="container">
-            <img src="media/neon.png" alt="Profile Picture" class="profile-picture">
-            <table class="statistics-table">
-                <tr>
-                    <th>Language</th>
-                    <th>Statistic</th>
-                    <th>Value</th>
-                </tr>
-                <tr>
-                    <td>English</td>
-                    <td>Stat 1</td>
-                    <td>Value 1</td>
-                </tr>
-                <tr>
-                    <td>Spanish</td>
-                    <td>Stat 2</td>
-                    <td>Value 2</td>
-                </tr>
-                <tr>
-                    <td>French</td>
-                    <td>Stat 3</td>
-                    <td>Value 3</td>
-                </tr>
-            </table>
-        </div>
+      <div class="radio-group">
+        <button>
+            <label>                      
+                <input type="radio" name="game-pass" value="pass1">
+                Game Pass 
+                <br>
+                <span class="description">Description for Game Pass 1</span>                  
+            </label>
+        </button>
+        <br>
+        <button>
+            <label>
+                <input type="radio" name="game-pass" value="pass2">
+                Genre Pass 
+                <br>
+                <span class="description">Description for Game Pass 2</span>
+            </label>
+        </button>
+        <br>
+        <button>
+            <label>
+                <input type="radio" name="game-pass" value="pass3">
+                Mystery Box
+                <br>
+                <span class="description">Description for Game Pass 3</span>
+            </label>
+        </button>
+    </div>
     </body>
     </html>
