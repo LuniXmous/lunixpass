@@ -8,12 +8,17 @@ h3 {
   color: white;
 }
 
+
 h1, h2, h3, h4, h5, p{
   color: white;
 }
 
 
 /* Carousel */
+.tawaran h2{
+  margin-bottom: 25px;
+}
+
 .carousel {
     width: auto;
     height: auto;
@@ -109,6 +114,7 @@ h1, h2, h3, h4, h5, p{
     background-color: #1e1e1e;
     overflow-x: hidden;
     padding-top: 20px;
+    border-radius: 15px;
   }
   
   .sidebar a {
@@ -134,14 +140,200 @@ h1, h2, h3, h4, h5, p{
     padding: 20px;
   }
 
+  /* Responsive Sidebar */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    padding-top: 50px;
+    height: auto;
+    position: relative;
+    border-radius: 0;
+  }
+
+  .sidebar a {
+    padding: 10px;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+}
+
 
   /* Navbar */
   .navbar-brand img{
     width: 100px;
     height: 50px;
   }
+  .navbar .bg-dark .navbar-expand-lg .bg-body-tertiary .sticky-sm-top {
+    background-color: #3a3a3a;
+  }
 
 /* Search */
-  .form-control{
-    width: 200px;
-  }
+.search-form {
+  display: flex;
+  align-items: center;
+  max-width: 300px;
+  margin: auto;
+}
+
+.search-input {
+  padding: 8px;
+  border: none;
+  color: white;
+  background-color: #3a3a3a;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.search-button {
+  margin-left: 8px;
+  padding: 8px 16px;
+  background-color: #131313;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #a30101;
+}
+
+.user-icon {
+  color: #9b9b9b;
+  margin-left: 10px;
+  font-size: 30px;
+}
+
+/* poster */
+.poster {
+  margin: 10px auto;
+  padding: 12px;
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.thumbnails-container {
+  width: 100%;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
+  -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: -10px;
+}
+
+.thumbnail {
+  width: 250px;
+  height: 120px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+/* Deskripsi */
+.deskripsi h2{
+  margin: 0px;
+}
+
+.deskripsi {
+  display: flex;
+}
+
+.left {
+  flex: 70%;
+}
+
+.left p, h2, h4{
+  width: 90%;
+  margin-top: 20px;
+}
+
+.right {
+  flex: 10%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* card */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.text-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: start;
+}
+.left-text, .right-text {
+  flex-basis: 50%;
+  margin: 40px;
+}
+
+.genre{
+  margin-top: 30px;
+}
+
+
+/* Profile */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.profile-picture {
+  text-align: center;
+}
+
+.profile-picture img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-picture h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.statistics-container {
+  margin-top: 20px;
+}
+
+.statistics-table {
+  width: 400px;
+  color: white;
+  text-align: center;
+}
+
+.statistics-table th {
+  border-right: 3px solid #3a3a3a;
+  border-left: 3px solid #3a3a3a;
+  padding: 10px;
+}
+
+th {
+  padding: 10px;
+}
+
+td {
+  padding: 10px;
+}
