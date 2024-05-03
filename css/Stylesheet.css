@@ -438,6 +438,7 @@ td {
 .form-control[type="password"] {
   border: none;
   background-color: #2e2e2e;
+  color: white;
   width: 500px;
 }
 
@@ -446,6 +447,10 @@ td {
 .form-control[type="password"]::placeholder {
   color: white;
 }
+
+
+
+
 
 /* Payment Method */
 .links {
@@ -457,4 +462,30 @@ td {
   margin: 0 10px;
   color: white;
   text-decoration: none;
+}
+
+.garis-horizontal {
+  border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+.sponsor {
+  overflow: auto;
+}
+
+.gambar {
+  float: left;
+  margin-right: 40px;
+}
+
+.teks {
+  overflow: hidden;
+  font-size: large;
+}
+
+#norek{
+  margin-top: 90px;
+} 
+
+#submitpayment {
+  margin-top: 30px;
 }

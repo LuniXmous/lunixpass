@@ -11,30 +11,33 @@
     <title>LuniXpass</title>
 </head>
 <body>   
-<div class="content"> 
-    <div class="card position-absolute top-50 start-50 translate-middle text-light" style="width: 70rem; background-color: #1c1c1c;">
-    <div class="card-header">
-        <h2>Payment Method</h2>
-        <div class="links"style="margin-bottom: 20px;">
-            <div>
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+<div> 
+    <div class="card position-absolute top-50 start-50 translate-middle text-light" style="width: 70rem; height: 35rem; background-color: #1c1c1c;">
+        <div class="card-header">
+          <h2>Payment Method</h2>
+            <div class="links"style="margin-bottom: 20px;">
+                <div>
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
             </div>
+            <div class="garis-horizontal"></div>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="sponsor">
+                    <img src="media/dana.png" alt="Gambar" class="gambar">
+                    <div class="teks">
+                        <p>Bayar dengan Akun DANA Anda, Tolong Persiapkan Perangkat Telepon anda</p>
+                    </div>
+                    <input type="input" class="form-control" id="norek" aria-describedby="rekening" placeholder="Nomor VA">
+                </div>
+                <center><a href="homepage.html" class="btn btn-primary mb-3" id="submitpayment">submit</a></center>
+            </form>
         </div>
     </div>
-    <div class="card-body">
-        <form>
-            <div class="mb-3">
-              <div>
-              <img src="media/dana.png" alt="norek" style="width: 60px; height: 60px; margin-bottom: 60px;">
-            </div>
-                <input type="input" class="form-control" id="norek" aria-describedby="rekening" placeholder="Nomor Rekening">
-            </div>
-            <center><a href="homepage.html" class="btn btn-primary">submit</a></center>
-        </form>
-    </div>
-</div>
+    
 
 </div>
 </body>
