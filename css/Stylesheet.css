@@ -432,11 +432,17 @@ td {
     color: #ffffff;
   }
 
-  /* Login */
+  /* Login & Register*/
 .form-control[type="input"],
 .form-control[type="email"],
 .form-control[type="password"] {
   border: none;
   background-color: #2e2e2e;
-  color: white; /* Ganti dengan warna yang diinginkan */
+  width: 500px;
+}
+
+.form-control[type="input"]::placeholder,
+.form-control[type="email"]::placeholder,
+.form-control[type="password"]::placeholder {
+  color: white;
 }

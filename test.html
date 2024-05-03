@@ -8,61 +8,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" crossorigin="anonymous"></script>
     <!DOCTYPE html>
     <html>
-    
-    <head>
         <style>
-          .radio-group button{
-            background-color: #131313; 
-            border: 2px solid red; border-radius: 10px;
-            width: 800px;
-            height: 200px;
-          }
-
-          .radio-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: white;
+            body {
+              background-color: #2196F3;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              height: 100vh;
             }
-
-            .radio-group input[type="radio"] {
-            margin-right: 5px;
+            
+            .container {
+              background-color: #fff;
+              padding: 20px;
+              border-radius: 10px;
+              width: 400px;
+              text-align: center;
             }
-
-            .radio-group .description {
-            font-size: 14px;
-            color: #ffffff;
+            
+            .login-form {
+              margin-bottom: 20px;
             }
-        </style>
-    </head>
-    
-    <body>
-      <div class="radio-group">
-        <button>
-            <label>                      
-                <input type="radio" name="game-pass" value="pass1">
-                Game Pass 
-                <br>
-                <span class="description">Description for Game Pass 1</span>                  
-            </label>
-        </button>
-        <br>
-        <button>
-            <label>
-                <input type="radio" name="game-pass" value="pass2">
-                Genre Pass 
-                <br>
-                <span class="description">Description for Game Pass 2</span>
-            </label>
-        </button>
-        <br>
-        <button>
-            <label>
-                <input type="radio" name="game-pass" value="pass3">
-                Mystery Box
-                <br>
-                <span class="description">Description for Game Pass 3</span>
-            </label>
-        </button>
-    </div>
-    </body>
-    </html>
+            
+            .login-form input {
+              width: 100%;
+              padding: 10px;
+              margin-bottom: 10px;
+              border: none;
+              border-radius: 5px;
+            }
+            
+            .login-form button {
+              width: 100%;
+              padding: 10px;
+              background-color: #2196F3;
+              color: #fff;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+            }
+            
+            .forgot-password {
+              text-align: right;
+            }
+            
+            .forgot-password a {
+              color: #2196F3;
+              text-decoration: none;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h2>Login</h2>
+            <form class="login-form">
+              <input type="text" placeholder="Username">
+              <input type="password" placeholder="Password">
+              <button type="submit">Sign in</button>
+            </form>
+            <div class="forgot-password">
+              <a href="#">Forgot password?</a>
+            </div>
+          </div>
+        </body>
+        </html>
