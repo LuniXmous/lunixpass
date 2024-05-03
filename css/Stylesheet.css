@@ -446,3 +446,15 @@ td {
 .form-control[type="password"]::placeholder {
   color: white;
 }
+
+/* Payment Method */
+.links {
+  display: flex;
+  justify-content: center;
+}
+
+.links a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
