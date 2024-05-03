@@ -363,7 +363,7 @@ td {
 } */
 
 .tombol {
-  display: inline-block;
+  display: inline-block;  
   padding: 10px 20px;
   border-radius: 10px;
   border: 2px solid #cc0000;
@@ -373,9 +373,7 @@ td {
   text-align: center;
   text-decoration: none;
   color: #ffffff;
-  margin: 30px;
 }
-
 .offers-container {
   margin-top: 50px;
   width: 100%;
@@ -383,7 +381,6 @@ td {
   scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
   -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
 }
-
 .offers {
   display: flex;
   flex-wrap: nowrap;
@@ -395,33 +392,51 @@ td {
   height: 120px;
   margin: 10px;
   border-radius: 10px;
-}
-
-
-.radio-group button{
-  background-color: #131313; 
-  border: 2px solid red; border-radius: 10px;
-  width: 800px;
-  height: 200px;
-  margin-top: 20px;
-}
-
+  }
+.radio-group{
+  margin-top: 50px;
+  }
 .radio-group label {
   display: block;
-  margin-bottom: 10px;
   color: white;
+  font-size: x-large;
+  margin-top: -90px;
   }
-
+  .radio-group button label {
+    text-align: left;
+  }
   .radio-group input[type="radio"] {
   margin-right: 5px;
-  justify-content: start;
-  justify-items: start;
-  align-items: start;
-  align-items: start;
+  width: 20px;
+  height: 20px;
   }
-
   .radio-group .description {
-  font-size: 14px;
-  color: #ffffff;
+  font-size: medium;
+  width: 10px;
+  color: #909090;
+  }
+  .radio-group .card{
+    background-color: #1e1e1e; 
+    border: 2px solid red; border-radius: 10px;
+    width: 800px;
+    height: 200px;
+    margin-top: 20px;
+  }
+  .tombolbuy{
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 50px;
+    border: 2px solid #cc0000;
+    background-color: #131313;
+    font-size: 16px;
+    color: #ffffff;
   }
 
+  /* Login */
+.form-control[type="input"],
+.form-control[type="email"],
+.form-control[type="password"] {
+  border: none;
+  background-color: #2e2e2e;
+  color: white; /* Ganti dengan warna yang diinginkan */
+}
