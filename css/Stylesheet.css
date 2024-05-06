@@ -362,32 +362,32 @@ td {
   background-color: #8d0000;
 } */
 
-  .tombol {
-    display: inline-block;  
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: 2px solid #cc0000;
-    background-color: #131313;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: #ffffff;
-  }
+.tombol {
+  display: inline-block;  
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #cc0000;
+  background-color: #131313;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+}
 
-  .offers-container {
-    margin-top: 50px;
-    width: 100%;
-    overflow-x: scroll;
-    scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
-    -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
-  }
+.offers-container {
+  margin-top: 50px;
+  width: 100%;
+  overflow-x: scroll;
+  scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
+  -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
+}
 
-  .offers {
-    display: flex;
-    flex-wrap: nowrap;
-    margin-left: -10px;
-  }
+.offers {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: -10px;
+}
 
 .offer {
   width: 250px;
@@ -442,6 +442,18 @@ td {
   }
 
   /* Login & Register*/
+  #masuk {
+    width: 60rem; 
+    background-color: #1c1c1c;
+  }
+
+  #icon{
+    height: 250px; 
+    width: 500px; 
+    margin-left: auto; 
+    margin-right: auto;
+  }
+
   .form-control[type="input"],
   .form-control[type="email"],
   .form-control[type="password"] {
@@ -457,9 +469,52 @@ td {
     color: white;
   }
 
+  .isiMasuk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .form-text {
     color: #ffffff;
   }
+    
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    #masuk {
+      width: 45rem;
+    }
+
+    .form-control[type="input"],
+    .form-control[type="email"],
+    .form-control[type="password"] {
+      width: 400px;
+    }
+
+    #icon{
+      width: 400px;
+      height: 200px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    #masuk {
+      width: 25rem;
+    }
+
+    .form-control[type="input"],
+    .form-control[type="email"],
+    .form-control[type="password"] {
+      width: 350px;
+    }
+
+    #icon{
+      width: 350px;
+      height: 200px;
+    }
+
+  }
+
 
   /* Payment Method */
   .links {
@@ -482,13 +537,13 @@ td {
     border-bottom: 1.5px solid rgb(142, 142, 142);
   }
 
-  .sponsor {
-    overflow: auto;
-  }
-
   .gambar {
     float: left;
     margin-right: 40px;
+  }
+
+  .sponsor {
+    overflow: auto;
   }
 
   .teks {
@@ -497,10 +552,63 @@ td {
     width: 65%;
   }
 
+  #bayar {
+  width: 70rem;
+  height: 35rem;
+  background-color: #1c1c1c;
+  padding: auto;
+  }
+
   #norek{
     margin-top: 60px;
   } 
 
   #submitpayment {
     margin-top: 30px;
+  }
+
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .teks {
+      width: 40%;
+    }
+
+    #norek {
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    #bayar{
+      width: 45rem;
+      height: 25rem;
+    }
+
+    .gambar{
+      width: 140px;
+      height: 140px;
+    }
+
+  }
+
+  @media (max-width: 576px) {
+    .links {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .garis-horizontal {
+      width: 100%;
+    }
+  
+    #bayar{
+      width: 25rem;
+      height: 25rem;
+      }
+
+    #norek{
+      margin-top: 10px;
+    }
+    #submitpayment {
+      margin-top: 20px;
+    }
   }
