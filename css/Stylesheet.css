@@ -362,30 +362,32 @@ td {
   background-color: #8d0000;
 } */
 
-.tombol {
-  display: inline-block;  
-  padding: 10px 20px;
-  border-radius: 10px;
-  border: 2px solid #cc0000;
-  background-color: #131313;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  color: #ffffff;
-}
-.offers-container {
-  margin-top: 50px;
-  width: 100%;
-  overflow-x: scroll;
-  scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
-  -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
-}
-.offers {
-  display: flex;
-  flex-wrap: nowrap;
-  margin-left: -10px;
-}
+  .tombol {
+    display: inline-block;  
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid #cc0000;
+    background-color: #131313;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .offers-container {
+    margin-top: 50px;
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
+    -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
+  }
+
+  .offers {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-left: -10px;
+  }
 
 .offer {
   width: 250px;
@@ -393,28 +395,34 @@ td {
   margin: 10px;
   border-radius: 10px;
   }
+
 .radio-group{
   margin-top: 50px;
   }
+
 .radio-group label {
   display: block;
   color: white;
   font-size: x-large;
   margin-top: -90px;
   }
+
   .radio-group button label {
     text-align: left;
   }
+
   .radio-group input[type="radio"] {
   margin-right: 5px;
   width: 20px;
   height: 20px;
   }
+
   .radio-group .description {
   font-size: medium;
   width: 10px;
   color: #909090;
   }
+
   .radio-group .card{
     background-color: #1e1e1e; 
     border: 2px solid red; border-radius: 10px;
@@ -422,6 +430,7 @@ td {
     height: 200px;
     margin-top: 20px;
   }
+
   .tombolbuy{
     padding: 10px 20px;
     border-radius: 10px;
@@ -433,59 +442,65 @@ td {
   }
 
   /* Login & Register*/
-.form-control[type="input"],
-.form-control[type="email"],
-.form-control[type="password"] {
-  border: none;
-  background-color: #2e2e2e;
-  color: white;
-  width: 500px;
-}
+  .form-control[type="input"],
+  .form-control[type="email"],
+  .form-control[type="password"] {
+    border: none;
+    background-color: #2e2e2e;
+    color: white;
+    width: 500px;
+  }
 
-.form-control[type="input"]::placeholder,
-.form-control[type="email"]::placeholder,
-.form-control[type="password"]::placeholder {
-  color: white;
-}
+  .form-control[type="input"]::placeholder,
+  .form-control[type="email"]::placeholder,
+  .form-control[type="password"]::placeholder {
+    color: white;
+  }
 
+  .form-text {
+    color: #ffffff;
+  }
 
+  /* Payment Method */
+  .links {
+    display: flex;
+    justify-content: center;
+  }
 
+  .links a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    font-size: large;
+  }
 
+  .links .garis-horizontal {
+    border-bottom: 3px solid red;
+  }
 
-/* Payment Method */
-.links {
-  display: flex;
-  justify-content: center;
-}
+  .garis-horizontal {
+    border-bottom: 1.5px solid rgb(142, 142, 142);
+  }
 
-.links a {
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-}
+  .sponsor {
+    overflow: auto;
+  }
 
-.garis-horizontal {
-  border-bottom: 2px solid rgb(255, 255, 255);
-}
+  .gambar {
+    float: left;
+    margin-right: 40px;
+  }
 
-.sponsor {
-  overflow: auto;
-}
+  .teks {
+    overflow: hidden;
+    font-size: large;
+    width: 65%;
+  }
 
-.gambar {
-  float: left;
-  margin-right: 40px;
-}
+  #norek{
+    margin-top: 60px;
+  } 
 
-.teks {
-  overflow: hidden;
-  font-size: large;
-}
-
-#norek{
-  margin-top: 90px;
-} 
-
-#submitpayment {
-  margin-top: 30px;
-}
+  #submitpayment {
+    margin-top: 30px;
+  }
