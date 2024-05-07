@@ -80,13 +80,16 @@
             passwordError.textContent = '';
         }
 
-        if (!isValid) {
-            event.preventDefault(); // Hindari pengiriman formulir jika ada kesalahan validasi
+        if (isValid) {
+            // Redirect ke homepage.html jika valid
+            window.location.href = 'homepage.html';
         }
+
+        event.preventDefault(); 
     });
 
     function isValidEmail(email) {
-        // Validasi format email menggunakan ekspresi reguler sederhana
+
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
