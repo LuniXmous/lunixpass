@@ -16,22 +16,25 @@
     <div class="card position-absolute top-50 start-50 translate-middle text-light" id="logres">
         <img class="card-header" src="media/LuniXpass.png" style="height: 250px; width: 500px; margin-left: auto; margin-right: auto;">
             <div class="card-body">
-                <form>
+                <form id="registrationForm">
                     <div class="mb-3" style="margin-top: -50px;">
                         <input type="input" class="form-control" id="exampleInputUsername1" aria-describedby="username" placeholder="Username">
+                        <div id="usernameError" class="invalid-feedback"></div>
                     </div>
                     <div class="mb-3" style="margin-top: 35px;">
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" >
+                        <div id="emailError" class="invalid-feedback"></div>
                         <div id="emailHelp" class="form-text">we'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <div id="passwordError" class="invalid-feedback"></div>
                     </div>
-                        <div class="mb-3 form-check">
+                    <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <center><a href="homepage.html" class="btn btn-primary">submit</a></center>
+                    <center><button type="submit" class="btn btn-primary">Submit</button></center>
                 </form>
                 <div class="forgot-password" style="margin-top: 30px;">
                     <a href="login.html">Already Have Account?</a>
@@ -39,5 +42,58 @@
             </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        var usernameInput = document.getElementById('exampleInputUsername1');
+        var emailInput = document.getElementById('exampleInputEmail1');
+        var passwordInput = document.getElementById('exampleInputPassword1');
+        var usernameError = document.getElementById('usernameError');
+        var emailError = document.getElementById('emailError');
+        var passwordError = document.getElementById('passwordError');
+        var isValid = true;
+
+        // Validasi username
+        if (usernameInput.value.trim() === '') {
+            usernameError.textContent = 'Username is required';
+            isValid = false;
+        } else {
+            usernameError.textContent = '';
+        }
+
+        // Validasi email
+        if (emailInput.value.trim() === '') {
+            emailError.textContent = 'Email is required';
+            isValid = false;
+        } else if (!isValidEmail(emailInput.value.trim())) {
+            emailError.textContent = 'Invalid email format';
+            isValid = false;
+        } else {
+            emailError.textContent = '';
+        }
+
+        // Validasi password
+        if (passwordInput.value.trim() === '') {
+            passwordError.textContent = 'Password is required';
+            isValid = false;
+        } else {
+            passwordError.textContent = '';
+        }
+
+        if (isValid) {
+            // Redirect ke homepage.html jika valid
+            window.location.href = 'homepage.html';
+        }
+
+        event.preventDefault(); 
+    });
+
+    function isValidEmail(email) {
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+</script>
+
 </body>
 </html>
