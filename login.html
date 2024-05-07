@@ -11,7 +11,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
         crossorigin="anonymous"></script>
-    <script src="thumbnail.js"></script>
     <link rel="stylesheet" href="css/Stylesheet.css">
     <title>LuniXpass</title>
 </head>
@@ -21,7 +20,7 @@
         <div class="card position-absolute top-50 start-50 translate-middle text-light" id="masuk">
             <img class="card-header" src="media/LuniXpass.png" id="icon">
             <div class="card-body" id="isiMasuk">
-                <form id="loginForm" onsubmit="return validateForm()">
+                <form id="loginForm">
                     <div class="mb-3" style="margin-top: -50px;">
                         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
                             placeholder="Email Address" required>
@@ -48,27 +47,21 @@
     </div>
     
     <script>
-        function validateForm() {
-            var email = document.getElementById("exampleInputEmail1").value;
-            var password = document.getElementById("exampleInputPassword1").value;
-            var valid = true;
-            const testemail = "sain@mail.com"
-            const testpass = "123"
+       document.getElementById("loginForm").addEventListener("submit", function(event){
+           event.preventDefault(); // Prevent default form submission
+           console.log("Form submission attempted."); // Add this line
+           var email = document.getElementById("exampleInputEmail1").value;
+           var password = document.getElementById("exampleInputPassword1").value;
+           console.log(email);
+           console.log(password);
+           const testemail = "sain@mail.com";
+           const testpass = "123";
 
-            if (email == "" || password == "") {
-                alert("Email and password cannot be empty!");
-                return false;
-            }
-            if (email == testemail && password == testpass) {
-                console.log("berhasil")
-                valid = true;
-            }
-            if (valid) {
-                window.location.href = "homepage.html";
-            }
-
-
-        }
+           if (email == testemail && password == testpass) {
+               console.log("berhasil");
+               window.location.href = "homepage.html";
+           }
+       });
     </script>
 </body>
 
