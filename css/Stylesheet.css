@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, p{
 }
 
 .backg {
-    margin-top: 80px;
+    margin-top: 90px;
     width: 100%;
 }
 
@@ -61,6 +61,17 @@ h1, h2, h3, h4, h5, p{
   .container img {
     display: inline-block;
     padding: 5px;
+    height: 300px;
+    width: 200px;
+    border-radius: 30px;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 768px) {
+    .container img {
+    height: 200px;
+    width: 150px;
+    }
   }
 
   
@@ -80,11 +91,16 @@ h1, h2, h3, h4, h5, p{
   width: 100%; /* Mengatur lebar gambar */
   height: 100%; /* Mengatur tinggi gambar */
   object-fit: cover;
-  border-radius: 10px; /* Mengatur sudut melengkung pada gambar */
+  border-radius: 10px;
 }
 .game-item h3 {
   margin-top: 10px; /* Mengatur jarak antara judul dan gambar */
 }
+
+#bestgame {
+  padding: 5px;
+}
+
 
 /* card */
   .card{
@@ -96,12 +112,6 @@ h1, h2, h3, h4, h5, p{
     color: white;
   }
   
-
-  /* */
-  #bestgame {
-    padding: 5px;
-  }
-
 
   /* sidebar */
   .sidebar {
@@ -206,7 +216,7 @@ h1, h2, h3, h4, h5, p{
   font-size: 30px;
 }
 
-/* poster */
+/* poster *//* Deskripsi */
 .poster {
   margin: 10px auto;
   padding: 12px;
@@ -221,8 +231,8 @@ h1, h2, h3, h4, h5, p{
 .thumbnails-container {
   width: 100%;
   overflow-x: scroll;
-  scrollbar-width: none; /* Untuk menghilangkan tampilan default scroll bar (hanya berlaku di beberapa browser) */
-  -ms-overflow-style: none; /* Untuk menghilangkan tampilan default scroll bar di IE/Edge (hanya berlaku di IE/Edge) */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 
 .thumbnails {
@@ -238,20 +248,25 @@ h1, h2, h3, h4, h5, p{
   border-radius: 10px;
 }
 
-/* Deskripsi */
-.deskripsi h2{
-  margin: 0px;
+#tag {
+  width: 15rem;
 }
 
 .deskripsi {
   display: flex;
 }
 
+.deskripsi h2{
+  margin: 0px;
+}
+
 .left {
   flex: 70%;
 }
 
-.left p, h2, h4{
+.left p,
+h2,
+h4 {
   width: 90%;
   margin-top: 20px;
 }
@@ -262,6 +277,46 @@ h1, h2, h3, h4, h5, p{
   align-items: center;
   margin-top: 20px;
 }
+
+
+@media screen and (max-width: 768px) {
+  .deskripsi {
+    flex-direction: column;
+  }
+
+  .left p,
+  h2,
+  h4 {
+    width: 100%;
+  }
+
+  .right {
+    flex: 100%;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    .deskripsi {
+      flex-direction: column;
+    }
+  
+    .left p,
+    h2,
+    h4 {
+      width: 100%;
+    }
+  
+    .right {
+      flex: 100%;
+      text-align: center;
+    }
+  
+    #tag {
+      width:100%;
+    }
+  }
+}
+
 
 /* card */
 .card-body {
