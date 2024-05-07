@@ -15,19 +15,20 @@
     <div class="card position-absolute top-50 start-50 translate-middle text-light" id="masuk">
         <img class="card-header" src="media/LuniXpass.png" id="icon">
             <div class="card-body" id="isiMasuk">
-                <form>
+                <form id="loginForm" onsubmit="return validateForm()">
                     <div class="mb-3" style="margin-top: -50px;">
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" >
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" required>
                     </div>
                     <div class="mb-3">
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
                     </div>
                     <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <center><a href="homepage.html" class="btn btn-primary">submit</a></center>
+                    <center><button type="submit" class="btn btn-primary">Submit</button></center>
                 </form>
+                
                 <div class="forgot-password" style="margin-top: 30px;">
                     <a href="#">Forgot password?</a>
                 </div>
@@ -37,5 +38,20 @@
             </div>
     </div>
 </div>
+<script>
+    function validateForm() {
+        var email = document.getElementById("exampleInputEmail1").value;
+        var password = document.getElementById("exampleInputPassword1").value;
+        
+        if (email == "" || password == "") {
+            alert("Email and password cannot be empty!");
+            return false;
+        }
+        window.location.href = "homepage.html"; 
+        
+    }
+</script>
+
 </body>
+
 </html>
