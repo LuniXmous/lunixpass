@@ -731,3 +731,7 @@ td {
     width: 100%;
   }
 }
+
+nav.navbar {
+  background-color: #1e1e1e !important;
+}
