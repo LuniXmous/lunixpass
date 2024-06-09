@@ -56,8 +56,8 @@
                                 <td>Otto</td>
                                 <td>@mdo</td>
                                 <td>
-                                  <button style="margin: 2px;" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateUserModal" ><i class="fa-solid fa-pen"></i> Update</button>
-                                  <button style="margin: 2px;" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal" ><i class="fa-solid fa-trash"></i> Delete</button>
+                                  <button style="margin: 2px;" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateSubscriptionModal" ><i class="fa-solid fa-pen"></i> Update</button>
+                                  <button style="margin: 2px;" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteSubscriptionModal" ><i class="fa-solid fa-trash"></i> Delete</button>
                               </td>
                               </tr>
                               <tr>
@@ -123,6 +123,73 @@
   </div>
 </div>  
 
+<!-- Modal Update-->
+<div class="modal fade" id="updateSubscriptionModal" tabindex="-1" aria-labelledby="updateSubscriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #1c1c1c;">
+        <h5 class="modal-title" id="updateSubscriptionModalLabel">Update Subscription</h5>
+        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light" style="background-color: #1c1c1c;">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control text-light" id="firstName"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="handle" class="form-label">Handle</label>
+            <input type="text" class="form-control text-light" id="handle"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control text-light" id="email"   style="background-color: #131313; border-color: #131313;" required>
+          </div>
+        </form> 
+      </div>
+      <div class="modal-footer" style="background-color: #1c1c1c;">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete -->
+<div class="modal fade" id="deleteSubscriptionModal" tabindex="-1" aria-labelledby="deleteSubscriptionModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #1c1c1c;">
+        <h5 class="modal-title" id="deleteSubscriptionModalLabel">Delete Subscription</h5>
+        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light" style="background-color: #1c1c1c;">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control text-light" id="firstName"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+        </form> 
+      </div>
+      <div class="modal-footer" style="background-color: #1c1c1c;">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     
