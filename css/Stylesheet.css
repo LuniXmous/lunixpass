@@ -84,12 +84,13 @@ h1, h2, h3, h4, h5, p{
     height: 100%; /* Mengatur tinggi gambar */
     margin-top: 80px;
   }
+
   .game-item {
     text-align: center;
   }
   .game-item img {
-    width: 100%; /* Mengatur lebar gambar */
-    height: 100%; /* Mengatur tinggi gambar */
+    width: 250px; /* Mengatur lebar gambar */
+    height: 270px; /* Mengatur tinggi gambar */
     object-fit: cover;
     border-radius: 10px;
   }
@@ -97,9 +98,11 @@ h1, h2, h3, h4, h5, p{
     margin-top: 10px; /* Mengatur jarak antara judul dan gambar */
   }
 
-  #bestgame {
-    padding: 5px;
+  .bestg img {
+    width: 200px;
+    width: 100px;
   }
+
 
 
   /* card */
@@ -417,10 +420,6 @@ td {
   text-align: center;
 }
 
-/* .tombol:hover {
-  background-color: #8d0000;
-} */
-
 .tombol {
   display: inline-block;  
   padding: 10px 20px;
@@ -502,8 +501,8 @@ td {
 
   @media (max-width: 576px) {
     .info img {
-      width: 100%;
-      height: auto;
+      width: 400px;
+      height: 200px;
     }
 
     .info h2 {
@@ -541,7 +540,7 @@ td {
     background-color: #1c1c1c;
   }
 
-  #icon{
+  #icon { 
     height: 250px; 
     width: 500px; 
     margin-left: auto; 
@@ -706,3 +705,29 @@ td {
       margin-top: 20px;
     }
   }
+
+  /* .sb-sidenav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    } */
+
+.table-dark{
+  width: 1000px;
+}
+.table-dark th, td {
+  text-align: center;
+  vertical-align: middle;
+}
+.card-header{
+  border-width: 3px; 
+  border-color: #1c1c1c;
+}
+
+@media (max-width: 1298px) {
+  .table-dark {
+    width: 100%;
+  }
+}

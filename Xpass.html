@@ -24,11 +24,11 @@
         <h2>Play many selected and quality games for only IDR 60,000.00 for 1 month!</h2>
         <p>Members will get many exclusive games with a predetermined duration.</p>
         <div>
-            <button type="button" class="tombol" style="color: white; background-color: red;">Large button</button>
-            <button type="button" class="tombol">Large button</button> 
+            <button type="button" class="tombol" style="color: white; background-color: red; "onclick="jumpToBottom()">Buy LuniXpass</button>
+            <button type="button" class="tombol" onclick="jumpToTop()">See offer</button> 
         </div>  
     </div>
-    <div class="info">
+    <div class="info" id="pass">
         <img src="media/LuniXpass.png" alt="brand"> 
         <h2>Play many selected and quality games for only IDR 60,000.00 for 1 month!</h2>
         <p>Members will get many exclusive games with a predetermined duration.</p>
@@ -60,7 +60,7 @@
             </div>
         </div>  
     </div>
-    <div class="info">
+    <div class="info" id="option">
         <img src="media/LuniXpass.png" alt="brand"> 
         <h2>Play many selected and quality games for only IDR 60,000.00 for 1 month!</h2>
         <p>Members will get many exclusive games with a predetermined duration.</p>
@@ -99,11 +99,19 @@
                     </div>
                 </div>
             </form>
-                <center><button type="button" class="tombolbuy" style="color: white; background-color: red;">Large button</button></center>
+                <center><a type="button" class="tombolbuy" style="color: white; background-color: red;" href="pm_dana.html">Buy Pass</a></center>
         </div>  
     </div>
-
-    
 </div>
+  <script>
+    function jumpToBottom() {
+      const infoSection = document.querySelector('#option');
+      infoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    function jumpToTop() {
+      const infoSection = document.querySelector('#pass');
+      infoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
 </body>
 </html>

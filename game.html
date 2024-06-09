@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="thumbnail.js"></script>
+    <link rel="stylesheet" href="css/Stylesheet.css">
+    <title>User</title>
+</head>
+<body>
+    <div class="sidebar">
+        <a class="navbar-brand" href="index.html"><img src="media/LuniXpass-removebgpng.png" alt="img"></a>
+        <a href="dashboard.html">
+            <i class="fa-solid fa-house"></i> Dashboard</a>
+        <a href="user.html"><i class="fa-regular fa-user"></i> User</a>
+        <a class="active" href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
+        <a href="subscribe.html"> <i class="fa-solid fa-subscript"></i> Subscription</a>       
+    </div>
+<div class="content">
+    <div class="container-fluid" >
+        <div class="d-sm-flex align-items-center justify-content-between" style="margin-bottom: 40px;">
+            <h1 class="h3 mb-0 text-light"><i class="fa-solid fa-gamepad"></i> Game </h1>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        </div>
+        <div class="garis-horizontal" style="margin-bottom: 30px;"></div>
+
+<div class="row">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h3 class="m-2 font-weight-bold">Game Table</h3>
+          <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addGameModal">
+          <i class="fa-solid fa-gamepad"></i> Add Game
+        </button>
+      </div>
+        <!-- Card Body -->
+        <div class="card-body">
+            <div class="chart-area">
+                <table class="table-dark table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">First</th>
+                        <th scope="col">Last</th>
+                        <th scope="col">Handle</th>
+                        <th scope="col">Tindakan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>
+                          <button style="margin: 2px;" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateGameModal" ><i class="fa-solid fa-pen"></i> Update</button>
+                          <button style="margin: 2px;" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal" ><i class="fa-solid fa-trash"></i> Delete</button>
+                       </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                        <td>
+                            <button style="margin: 2px;" type="button" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i> Update</button>
+                            <button style="margin: 2px;" type="button" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry the Bird</td>
+                        <td>Thornton</td>
+                        <td>@twitter</td>
+                        <td>
+                            <button style="margin: 2px;" type="button" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen"></i> Update</button>
+                            <button style="margin: 2px;" type="button" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i> Delete</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addGameModal" tabindex="-1" aria-labelledby="addGameModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #1c1c1c;">
+        <h5 class="modal-title" id="addGameModalLabel">Add New Game</h5>
+        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light" style="background-color: #1c1c1c;">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control text-light" id="firstName"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="handle" class="form-label">Handle</label>
+            <input type="text" class="form-control text-light" id="handle"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control text-light" id="email"   style="background-color: #131313; border-color: #131313;" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer" style="background-color: #1c1c1c;">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveUserBtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Update-->
+<div class="modal fade" id="updateGameModal" tabindex="-1" aria-labelledby="updateGameModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #1c1c1c;">
+        <h5 class="modal-title" id="updateGameModalLabel">Update Game</h5>
+        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light" style="background-color: #1c1c1c;">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control text-light" id="firstName"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="handle" class="form-label">Handle</label>
+            <input type="text" class="form-control text-light" id="handle"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control text-light" id="email"   style="background-color: #131313; border-color: #131313;" required>
+          </div>
+        </form> 
+      </div>
+      <div class="modal-footer" style="background-color: #1c1c1c;">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Delete -->
+<div class="modal fade" id="deleteGameModal" tabindex="-1" aria-labelledby="deleteGameModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #1c1c1c;">
+        <h5 class="modal-title" id="deleteGameModalLabel">Update New User</h5>
+        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-light" style="background-color: #1c1c1c;">
+        <form id="addUserForm">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control text-light" id="firstName"  style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
+          </div>
+        </form> 
+      </div>
+      <div class="modal-footer" style="background-color: #1c1c1c;">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    
+  <script>
+    function jumpToBottom() {
+      const infoSection = document.querySelector('#option');
+      infoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    function jumpToTop() {
+      const infoSection = document.querySelector('#pass');
+      infoSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

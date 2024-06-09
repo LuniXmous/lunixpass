@@ -33,7 +33,7 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                   <button type="submit" class="btn btn-primary">Submit</button>
+                   <center><button type="submit" class="btn btn-primary">Submit</button></center>
                 </form>
 
                 <div class="forgot-password" style="margin-top: 30px;">
@@ -48,18 +48,20 @@
     
     <script>
        document.getElementById("loginForm").addEventListener("submit", function(event){
-           event.preventDefault(); // Prevent default form submission
-           console.log("Form submission attempted."); // Add this line
+           event.preventDefault(); 
+           console.log("Form submission attempted."); 
            var email = document.getElementById("exampleInputEmail1").value;
            var password = document.getElementById("exampleInputPassword1").value;
-           console.log(email);
-           console.log(password);
+        //    console.log(email);
+        //    console.log(password);
            const testemail = "sain@mail.com";
            const testpass = "123";
-
+            
            if (email == testemail && password == testpass) {
-               console.log("berhasil");
+               alert("Logged In!")
                window.location.href = "homepage.html";
+           } else {
+            alert("username or password are incorrect!")
            }
        });
     </script>
