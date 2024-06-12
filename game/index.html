@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="../js/game.js"></script>
+    <title>Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        @media (max-width: 767px) {
+            .form-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto my-8">
+        <h2 class="text-2xl font-bold mb-4">Click to Toggle Form</h2>
+        <div id="formContainer" class="hidden">
+        <form id="gameForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="game_name">
+                    Game Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="game_name" type="text" placeholder="Game Name" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="game_desc">
+                    Game Description
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="game_desc" type="text" placeholder="Game Description" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="publisher">
+                    Publisher
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="publisher" type="text" placeholder="Publisher" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="release_date">
+                    Release Date
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="release_date" type="date" placeholder="Release Date" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="size">
+                    Size
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="size" type="text" placeholder="Size" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="genre">
+                    Genre (comma-separated)
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="genre" type="text" placeholder="Genre (comma-separated)" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="game_image">
+                    Upload Image
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="game_image" type="file" placeholder="Upload Image" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="addGame" type="submit">
+                    Add Game
+                </button>
+            </div>
+        </form>
+    </div>
+        <table id="gameTable" class="table-auto w-full">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2">Game Name</th>
+                    <th class="px-4 py-2">Description</th>
+                    <th class="px-4 py-2">Publisher</th>
+                    <th class="px-4 py-2">Release Date</th>
+                    <th class="px-4 py-2">Size</th>
+                    <th class="px-4 py-2">Genre</th>
+                    <th class="px-4 py-2">Image</th>
+                    <th class="px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Game data will be appended here -->
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    const formContainer = document.getElementById('formContainer');
+    const header = document.querySelector('h2');
+
+    header.addEventListener('click', () => {
+        formContainer.classList.toggle('hidden');
+    });
+</script>
+</html>
