@@ -13,13 +13,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebas
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDUMTzcvauGBX39A-LgSW1l__9bOQQoA2M",
-    authDomain: "quiet-biplane-423907-k3.firebaseapp.com",
-    projectId: "quiet-biplane-423907-k3",
-    storageBucket: "quiet-biplane-423907-k3.appspot.com",
-    messagingSenderId: "731486024167",
-    appId: "1:731486024167:web:f85904688fa61c38008d42",
-    measurementId: "G-Q437YMP37Y",
+
 };
 
 // Initialize Firebase
@@ -85,14 +79,13 @@ async function deleteUser(userId) {
     location.reload(); // Refresh the page to show updated data
 }
 
-function editUser(userId, username, password) {
+function editUser(userId, username) {
     const newUsername = prompt("Enter new username:", username);
-    const newPassword = prompt("Enter new password:", password);
+    console.log(userId);
 
-    if (newUsername && newPassword) {
+    if (newUsername) {
         updateDoc(doc(db, "user", userId), {
             username: newUsername,
-            password: newPassword
         }).then(() => {
             location.reload(); // Refresh the page to show updated data
         });
@@ -104,8 +97,6 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Add logic to save the new user to Firestore
-    // Example: await addDoc(collection(db, "user"), { username, password });
-    // After adding, you can also reload the data or append the new user to the table directly
+  
 });
 
