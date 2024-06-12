@@ -1,50 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="thumbnail.js"></script>
+    <script src="js/thumbnail.js"></script>
+    
     <link rel="stylesheet" href="css/Stylesheet.css">
     <title>LuniXpass</title>
 </head>
-<body>   
-    
+<body>
 <div>
-    <div class="card position-absolute top-50 start-50 translate-middle text-light" id="masuk">
-        <img class="card-header" src="media/LuniXpass.png" id="icon">
-            <div class="card-body" id="isiMasuk">
-                <form id="registrationForm">
-                    <div class="mb-3" style="margin-top: -50px;">
-                        <input type="input" class="form-control" id="exampleInputUsername1" aria-describedby="username" placeholder="Username">
-                        <div id="usernameError" class="invalid-feedback"></div>
-                    </div>
-                    <div class="mb-3" style="margin-top: 35px;">
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" >
-                        <div id="emailError" class="invalid-feedback"></div>
-                        <div id="emailHelp" class="form-text">we'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        <div id="passwordError" class="invalid-feedback"></div>
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <center><button type="submit" class="btn btn-primary">Submit</button></center>
-                </form>
-                <div class="forgot-password" style="margin-top: 30px;">
-                    <a href="login.html">Already Have Account?</a>
+    <div class="card position-absolute top-50 start-50 translate-middle text-light" id="logres">
+        <img class="card-header" src="media/LuniXpass.png" style="height: 250px; width: 500px; margin-left: auto; margin-right: auto;">
+        <div class="card-body">
+            <form id="registrationForm">
+                <div class="mb-3" style="margin-top: -50px;">
+                    <input type="input" class="form-control" id="exampleInputUsername1" aria-describedby="username" placeholder="Username">
+                    <div id="usernameError" class="invalid-feedback"></div>
                 </div>
+                <div class="mb-3" style="margin-top: 35px;">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address">
+                    <div id="emailError" class="invalid-feedback"></div>
+                    <div id="emailHelp" class="form-text">we'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <div id="passwordError" class="invalid-feedback"></div>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <center><button type="submit" id="submit" class="btn btn-primary">Submit</button></center>
+            </form>
+            <div class="forgot-password" style="margin-top: 30px;">
+                <a href="login.html">Already Have Account?</a>
             </div>
+        </div>
     </div>
 </div>
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 
-<script>
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyDUMTzcvauGBX39A-LgSW1l__9bOQQoA2M",
+        authDomain: "quiet-biplane-423907-k3.firebaseapp.com",
+        projectId: "quiet-biplane-423907-k3",
+        storageBucket: "quiet-biplane-423907-k3.appspot.com",
+        messagingSenderId: "731486024167",
+        appId: "1:731486024167:web:f85904688fa61c38008d42",
+        measurementId: "G-Q437YMP37Y"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    document.getElementById('registrationForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
         var usernameInput = document.getElementById('exampleInputUsername1');
         var emailInput = document.getElementById('exampleInputEmail1');
         var passwordInput = document.getElementById('exampleInputPassword1');
@@ -81,19 +105,34 @@
         }
 
         if (isValid) {
-            // Redirect ke homepage.html jika valid
-            window.location.href = 'homepage.html';
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value.trim());
+                const user = userCredential.user;
+                
+                await addDoc(collection(db, "user"), {
+                    uid: user.uid,
+                    username: usernameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    list_owned_game: ["a", "a"],
+                    statistic: {
+                        achievement: "0",
+                        game_owned: "0",
+                        game_time: "0"
+                    },
+                    createdAt: serverTimestamp()
+                });
+                
+                alert("Successfully registered!");
+            } catch (error) {
+                console.error("Error adding document: ", error);
+            }
         }
-
-        event.preventDefault(); 
     });
 
     function isValidEmail(email) {
-
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     }
 </script>
-
 </body>
 </html>
