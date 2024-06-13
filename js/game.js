@@ -150,7 +150,7 @@ function editGame(gameId, gameData) {
 }
 
 const editModal = document.getElementById('editModal');
-const cancelModalButton = document.getElementById('cancelModal');
+
 const saveChangesButton = document.getElementById('saveChanges');
 
 function openModal() {
@@ -161,7 +161,6 @@ function closeModal() {
     editModal.classList.add('hidden');
 }
 
-cancelModalButton.addEventListener('click', closeModal);
 
 saveChangesButton.addEventListener('click', async () => {
     const gameId = document.getElementById('edit_game_id').value;

@@ -1,8 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc , Timestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const firebaseConfig = {
+
 
 };
 
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     querySnapshot.forEach(doc => {
         const userData = doc.data();
-        console.log(userData);
+
         const row = userTable.insertRow();
         const uid = row.insertCell(0);
         const username = row.insertCell(1);
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         editButton.id = 'editButton';
         editButton.className = 'btn btn-warning';
         editButton.innerText = 'Edit';
-        editButton.addEventListener('click', () => editGame(doc.id, gameData));
+        editButton.addEventListener('click', () => editUser(doc.id, userData));
 
         const deleteButton = document.createElement('button');
         deleteButton.className = 'btn btn-danger';
@@ -76,8 +77,6 @@ async function deleteConfirm(userId, uid) {
 }
 
 async function deleteUser(userId, uid) {
-    console.log("path dari user adalah " + userId)
-    console.log("path dari uid user adalah " + uid)
     try {
         const userDocRef = doc(db, "user", userId);
         const userDoc = await getDoc(userDocRef);
@@ -93,7 +92,49 @@ async function deleteUser(userId, uid) {
     }
 }
 
-function editUser(userId, gameData){
-    console.log("path dari user adalah " + userId)
+function openModal(){
+    $("#updateUserModal").modal("toggle")
 
 }
+function closeModal(){
+    $('#updateUserModal').modal("hide");
+}
+function editUser(userId, userData) {
+    // const date = new Date(userData.subscription.subs_start_date.second *1000 +userData.subscription.subs_start_date.nanosecond/1000000)
+    document.getElementById("updateUsername").value = userData.username;
+    document.getElementById("updateAchievement").value = userData.statistic.achievement;
+    document.getElementById("updateGameTime").value = userData.statistic.game_time;
+    document.getElementById("updateSubsDate").value = userData.subscription.subs_start_date
+    document.getElementById("updateEndDate").value = userData.subscription.subs_end_date;
+    document.getElementById("updateTier").value = userData.subscription.subs_type;
+    document.getElementById("updateUserId").value = userId
+
+    openModal();
+}
+const saveChangesButton = document.getElementById('saveChange');
+
+saveChangesButton.addEventListener('click', async () => {
+   const id = document.getElementById("updateUserId").value 
+   const newUsername= document.getElementById("updateUsername").value 
+  const newAchievement =  document.getElementById("updateAchievement").value 
+  const newGameTime = document.getElementById("updateGameTime").value 
+  const newSubsStartDate =  document.getElementById("updateSubsDate").value
+   const newSubsEndDate =  document.getElementById("updateEndDate").value 
+   const newTier = document.getElementById("updateTier").value 
+if(newUsername && newAchievement && newGameTime && newSubsStartDate && newSubsEndDate && newTier) {
+    await updateDoc(doc(db,"user", id ), {
+        username : newUsername,
+        statistic : {
+            achievement : newAchievement,
+            game_time : newGameTime
+        },
+        subscription :{
+        subs_start_date : newSubsStartDate,
+        subs_end_date : newSubsEndDate,
+        subs_type : newTier,
+        }
+    });
+    location.reload();
+}
+closeModal();
+})

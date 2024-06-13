@@ -14,6 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
   <script src="js/thumbnail.js"></script>
   <script src="js/app.js" type="module"></script>
@@ -125,20 +126,44 @@
                 style="background-color: #131313; border-color: #131313;" required>
             </div>
             <div class="mb-3">
-              <label for="updateEmail" class="form-label">Email</label>
-              <input type="text" class="form-control text-light" id="updateEmail"
+              <p class="text-center">Statistic</p>
+              <label for="updateAchievement" class="form-label">Achievement</label>
+              <input type="number" class="form-control text-light" id="updateAchievement"
                 style="background-color: #131313; border-color: #131313;" required>
             </div>
-            <input type="hidden" id="updateUserId">
+            <div class="mb-3">
+              <label for="updateGameTime" class="form-label">Game Time</label>
+              <input type="number" class="form-control text-light" id="updateGameTime"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            
+            <div class="mb-3">
+              <p class="text-center">Subscription</p>
+              <label for="updateSubsDate" class="form-label">Start Date</label>
+              <input type="date" class="form-control text-light" id="updateSubsDate"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <div class="mb-3">
+              <label for="updateEndDate" class="form-label">End Date</label>
+              <input type="date" class="form-control text-light" id="updateEndDate"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <div class="mb-3">
+              <label for="updateTier" class="form-label">Tier</label>
+              <input type="number" class="form-control text-light" id="updateTier"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+          <input type="hidden" id="updateUserId">
           </form>
         </div>
         <div class="modal-footer" style="background-color: #1c1c1c;">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="updateUser()">Save changes</button>
+          <button type="button" class="btn btn-primary" id="saveChange">Save changes</button>
         </div>
       </div>
     </div>
   </div>
+
   <script>
     function jumpToBottom() {
       const infoSection = document.querySelector('#option');
@@ -152,7 +177,6 @@
       $('#myTable').DataTable();
     });
 
-    document.querySelector("#saveUserBtn").addEventListener("click", InsertData);
   </script>
   <script src="js/table.js"></script>
 </body>
