@@ -4,7 +4,7 @@ import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, g
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const firebaseConfig = {
-    // paste key here
+
 };
 
 const app = initializeApp(firebaseConfig);
@@ -41,12 +41,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const editButton = document.createElement('button');
         editButton.id = 'editButton';
-        editButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded';
+        editButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded';
         editButton.innerText = 'Edit';
-        editButton.addEventListener('click', () => editGame(doc.id, gameData));
+        editButton.addEventListener('click', () =>  {
+          const editModal = document.getElementById('editModal');
+          editModal.classList.remove('hidden');
+          editGame(doc.id, gameData);
+        });
+        
+        const modal = document.getElementById('editModal');
+        const closeButtons = document.querySelectorAll('.btn-close');
+
+        // Add a click event listener to each close button
+        closeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+        });
 
         const deleteButton = document.createElement('button');
-        deleteButton.className = 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded';
+        deleteButton.className = 'bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded';
         deleteButton.id = 'deleteButton';
         deleteButton.innerText = 'Delete';
         deleteButton.addEventListener('click', () => deleteGame(doc.id));
