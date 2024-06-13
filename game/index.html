@@ -13,6 +13,11 @@
                 width: 90%;
             }
         }
+
+        tbody tr:hover {
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -57,6 +62,12 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="genre" type="text" placeholder="Genre (comma-separated)" required>
             </div>
             <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="game_tier">
+                    Game Tier
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="game_tier" type="number" placeholder="game tier" required>
+            </div>
+            <div class="mb-4">
                 <label class="block text-gray-700 font-bold mb-2" for="game_image">
                     Upload Image
                 </label>
@@ -69,31 +80,95 @@
             </div>
         </form>
     </div>
-        <table id="gameTable" class="table-auto w-full">
-            <thead>
-                <tr class="bg-gray-200">
-                    <th class="px-4 py-2">Game Name</th>
-                    <th class="px-4 py-2">Description</th>
-                    <th class="px-4 py-2">Publisher</th>
-                    <th class="px-4 py-2">Release Date</th>
-                    <th class="px-4 py-2">Size</th>
-                    <th class="px-4 py-2">Genre</th>
-                    <th class="px-4 py-2">Image</th>
-                    <th class="px-4 py-2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Game data will be appended here -->
-            </tbody>
-        </table>
+    <table id="gameTable" class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Game ID</th>
+                <th class="px-4 py-2">Game Icon</th>
+                <th class="px-4 py-2">Game Name</th>
+                <th class="px-4 py-2">Game Description</th>
+                <th class="px-4 py-2">Publisher</th>
+                <th class="px-4 py-2">Release Date</th>
+                <th class="px-4 py-2">Size</th>
+                <th class="px-4 py-2">Genre</th>
+                <th class="px-4 py-2">Game Tier</th>
+                <th class="px-4 py-2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Game data will be appended here -->
+        </tbody>
+    </table>
+</div>
+
+<div id="editModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div>
+
+            <!-- This element is to trick the browser into centering the modal contents. -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Edit Game</h3>
+                            <div class="mt-2">
+                                <form id="editGameForm">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_game_name">Game Name</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_game_name" type="text" placeholder="Game Name" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_game_desc">Game Description</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_game_desc" type="text" placeholder="Game Description" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_publisher">Publisher</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_publisher" type="text" placeholder="Publisher" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_release_date">Release Date</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_release_date" type="date" placeholder="Release Date" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_size">Size</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_size" type="text" placeholder="Size" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_genre">Genre (comma-separated)</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_genre" type="text" placeholder="Genre (comma-separated)" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 font-bold mb-2" for="edit_game_image">Image URL</label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edit_game_image" type="text" placeholder="Image URL" required>
+                                    </div>
+                                    <input type="hidden" id="edit_game_id">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button id="saveChanges" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">Save changes</button>
+                    <button id="cancelModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+       
+    </script>
 </body>
 <script>
-    const formContainer = document.getElementById('formContainer');
-    const header = document.querySelector('h2');
+const formContainer = document.getElementById('formContainer');
+const header = document.querySelector('h2');
 
-    header.addEventListener('click', () => {
-        formContainer.classList.toggle('hidden');
-    });
+header.addEventListener('click', () => {
+    formContainer.classList.toggle('hidden');
+});
 </script>
 </html>
