@@ -1,270 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js" crossorigin="anonymous"></script>
-    <script src="thumbnail.js"></script>
-    <script type="module">
- 
-      // Polyfill for global in browser environment
-      window.global = window;
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, serverTimestamp, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-          apiKey: "AIzaSyDUMTzcvauGBX39A-LgSW1l__9bOQQoA2M",
-          authDomain: "quiet-biplane-423907-k3.firebaseapp.com",
-          projectId: "quiet-biplane-423907-k3",
-          storageBucket: "quiet-biplane-423907-k3.appspot.com",
-          messagingSenderId: "731486024167",
-          appId: "1:731486024167:web:f85904688fa61c38008d42",
-          measurementId: "G-Q437YMP37Y",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-      const db = getFirestore(app);
-
-
-      // Function to insert data into Firestore
-      function InsertData(event) {
-          event.preventDefault();
-          
-          const myCollection = collection(db, 'user');
-          const myDocumentData = {
-              username: generateRandomString(8),
-              email: generateRandomEmail(),
-              password: generateRandomString(12),
-              list_owned_game: ["a", "a"],
-              statistic: {
-                  achievement: "0",
-                  game_owned: "0",
-                  game_time: "0"
-              },
-              createdAt: serverTimestamp()
-          }
-
-          addDoc(myCollection, myDocumentData).then((newDocRef) => {
-              console.log('New document added with ID:', newDocRef.id);
-              fetchUserData(); // Fetch data again to update the table
-          }).catch((error) => {
-              console.error('Error adding document: ', error);
-          });
-      }
-
-      // Function to fetch data from Firestore and populate the table
-      async function fetchUserData() {
-          const querySnapshot = await getDocs(collection(db, "user"));
-          const tableBody = document.querySelector("#userTableBody");
-          tableBody.innerHTML = ""; // Clear existing table rows
-          let counter = 1;
-          querySnapshot.forEach((doc) => {
-              const userData = doc.data();
-              const row = document.createElement("tr");
-              row.innerHTML = `
-                  <th scope="row">${doc.id}</th>
-                  <td>${userData.username}</td>
-                  <td>${userData.email}</td>
-                  <td>@${userData.username}</td>
-                  <td>
-                      <button style="margin: 2px;" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#updateUserModal" onclick="loadUserData('${doc.id}', '${userData.username}', '${userData.email}')"><i class="fa-solid fa-pen"></i> Update</button>
-                      <button style="margin: 2px;" type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteUserModal" onclick="setDeleteUserId('${doc.id}')"><i class="fa-solid fa-trash"></i> Delete</button>
-                  </td>
-              `;
-              tableBody.appendChild(row);
-          });
-      }
-
-      // Function to load user data into the update modal
-      function loadUserData(id, username, email) {
-          document.querySelector("#updateUserId").value = id;
-          document.querySelector("#updateUsername").placeholder = username;
-          document.querySelector("#updateEmail").placeholder = email;
-          document.querySelector("#updateUsername").value = username;
-          document.querySelector("#updateEmail").value = email;
-      }
-
-      // Function to update user data
-      async function updateUser() {
-          const userId = document.querySelector("#updateUserId").value;
-          const updatedUsername = document.querySelector("#updateUsername").value;
-          const updatedEmail = document.querySelector("#updateEmail").value;
-
-          const userDoc = doc(db, "user", userId);
-          await updateDoc(userDoc, {
-              username: updatedUsername,
-              email: updatedEmail
-          });
-
-          fetchUserData();
-          document.querySelector("#updateUserModal .btn-close").click();
-      }
-
-      // Function to set the user ID for deletion
-      function setDeleteUserId(id) {
-          document.querySelector("#deleteUserId").value = id;
-      }
-
-      // Function to delete user
-      async function deleteUser() {
-          
-          const userId = document.querySelector("#deleteUserId").value;
-          console.log(userId)
-          const userDoc = doc(db, "user", userId);
-          await deleteDoc(userDoc);
-
-          fetchUserData();
-          document.querySelector("#deleteUserModal .btn-close").click();
-      }
-
-      // Fetch user data on page load
-      document.addEventListener("DOMContentLoaded", fetchUserData);
-
-  </script>
-    <link rel="stylesheet" href="css/Stylesheet.css">
-    <title>User</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+  <script src="js/thumbnail.js"></script>
+  <script src="js/app.js" type="module"></script>
+  <link rel="stylesheet" href="css/Stylesheet.css">
+  <title>User</title>
 </head>
+
 <body>
-    <div class="sidebar">
-        <a class="navbar-brand" href="index.html"><img src="media/LuniXpass-removebgpng.png" alt="img"></a>
-        <a href="dashboard.html">
-            <i class="fa-solid fa-house"></i> Dashboard</a>
-        <a class="active" href="user.html"><i class="fa-regular fa-user"></i> User</a>
-        <a href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
-        <a href="subscribe.html"> <i class="fa-solid fa-subscript"></i> Subscription</a>       
-    </div>
-<div class="content">
-        <div class="container-fluid" >
-            <div class="d-sm-flex align-items-center justify-content-between" style="margin-bottom: 40px;">
-                <h1 class="h3 mb-0 text-light"><i class="fa-regular fa-user"></i> User</h1>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-            </div>
-        <div class="garis-horizontal" style="margin-bottom: 30px;"></div>
-<div class="row">
-    <div class="card shadow mb-4">
-        <div
-            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+  <div class="sidebar">
+    <a class="navbar-brand" href="index.html"><img src="media/LuniXpass-removebgpng.png" alt="img"></a>
+    <a href="dashboard.html">
+      <i class="fa-solid fa-house"></i> Dashboard</a>
+    <a class="active" href="user.html"><i class="fa-regular fa-user"></i> User</a>
+    <a href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
+    <a href="subscribe.html"> <i class="fa-solid fa-subscript"></i> Subscription</a>
+  </div>
+  <div class="content">
+    <div class="container-fluid">
+      <div class="d-sm-flex align-items-center justify-content-between" style="margin-bottom: 40px;">
+        <h1 class="h3 mb-0 text-light"><i class="fa-regular fa-user"></i> User</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+      </div>
+      <div class="garis-horizontal" style="margin-bottom: 30px;"></div>
+      <div class="row">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
             <h3 class="m-2 font-weight-bold">User Table</h3>
             <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addUserModal">
               <i class="fa-regular fa-user"></i> Add User
             </button>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
             <div class="chart-area">
-                <table class="table-dark table-bordered">
-                    <thead>
-                      <tr>
-                        <th scope="col">No.</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody id="userTableBody">
-                    </tbody>
-                  </table>
+              <table class="table-dark table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">UID</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Joined At</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="userTableBody">
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-    </div>
-</div>
-</div>
-</div>
-
-<!-- Modal Add-->
-<div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #1c1c1c;">
-        <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
-        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-light" style="background-color: #1c1c1c;">
-        <form id="addUserForm">
-          <div class="mb-3">
-            <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control text-light" id="firstName"  style="background-color: #131313; border-color: #131313;" required>
-          </div>
-          <div class="mb-3">
-            <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control text-light" id="lastName" style="background-color: #131313; border-color: #131313;" required>
-          </div>
-          <div class="mb-3">
-            <label for="handle" class="form-label">Handle</label>
-            <input type="text" class="form-control text-light" id="handle"  style="background-color: #131313; border-color: #131313;" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control text-light" id="email"   style="background-color: #131313; border-color: #131313;" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer" style="background-color: #1c1c1c;">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="saveUserBtn">Save changes</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Update-->
-<div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #1c1c1c;">
-        <h5 class="modal-title" id="updateUserModalLabel">Update User</h5>
-        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-light" style="background-color: #1c1c1c;">
-        <form id="updateUserForm">
-          <div class="mb-3">
-            <label for="updateUsername" class="form-label">Username</label>
-            <input type="text" class="form-control text-light" id="updateUsername" style="background-color: #131313; border-color: #131313;" required>
-          </div>
-          <div class="mb-3">
-            <label for="updateEmail" class="form-label">Email</label>
-            <input type="text" class="form-control text-light" id="updateEmail" style="background-color: #131313; border-color: #131313;" required>
-          </div>
-          <input type="hidden" id="updateUserId">
-        </form> 
-      </div>
-      <div class="modal-footer" style="background-color: #1c1c1c;">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="updateUser()">Save changes</button>
+  <!-- Modal Add-->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #1c1c1c;">
+          <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+          <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-light" style="background-color: #1c1c1c;">
+          <form id="addUserForm">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control text-light" id="firstName"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control text-light" id="lastName"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <div class="mb-3">
+              <label for="handle" class="form-label">Handle</label>
+              <input type="text" class="form-control text-light" id="handle"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="text" class="form-control text-light" id="email"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer" style="background-color: #1c1c1c;">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveUserBtn">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Delete -->
-<div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header" style="background-color: #1c1c1c;">
-        <h5 class="modal-title" id="deleteUserModalLabel">Delete User</h5>
-        <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-light" style="background-color: #1c1c1c;">
-        <p>Are you sure you want to delete this user?</p>
-        <input type="hidden" id="deleteUserId">
-      </div>
-      <div class="modal-footer" style="background-color: #1c1c1c;">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="deleteUser()">Delete</button>
+  <!-- Modal Update-->
+  <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #1c1c1c;">
+          <h5 class="modal-title" id="updateUserModalLabel">Update User</h5>
+          <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-light" style="background-color: #1c1c1c;">
+          <form id="updateUserForm">
+            <div class="mb-3">
+              <label for="updateUsername" class="form-label">Username</label>
+              <input type="text" class="form-control text-light" id="updateUsername"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <div class="mb-3">
+              <label for="updateEmail" class="form-label">Email</label>
+              <input type="text" class="form-control text-light" id="updateEmail"
+                style="background-color: #131313; border-color: #131313;" required>
+            </div>
+            <input type="hidden" id="updateUserId">
+          </form>
+        </div>
+        <div class="modal-footer" style="background-color: #1c1c1c;">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="updateUser()">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
   <script>
     function jumpToBottom() {
       const infoSection = document.querySelector('#option');
@@ -274,12 +148,13 @@
       const infoSection = document.querySelector('#pass');
       infoSection.scrollIntoView({ behavior: 'smooth' });
     }
-    $(document).ready(function() {
-    $('#myTable').DataTable();
+    $.ready(function () {
+      $('#myTable').DataTable();
     });
 
     document.querySelector("#saveUserBtn").addEventListener("click", InsertData);
   </script>
   <script src="js/table.js"></script>
 </body>
+
 </html>

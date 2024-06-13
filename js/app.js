@@ -1,94 +1,99 @@
-var test = document.querySelector("#test");
-// var testing = document.querySelector("#testing");
-// testing.addEventListener("click", deleteUser);
-
-// Polyfill for global in browser environment
-window.global = window;
-
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp, deleteDoc, doc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
 
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
-// insert random data into Firebase
-function InsertData(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const myCollection = collection(db, 'user');
-    const myDocumentData = {
-        username: username,
-        email: generateRandomEmail(),
-        password: password,
-        list_owned_game: ["a", "a"],
-        statistic: {
-            achievement: "0",
-            game_owned: "0",
-            game_time: "0"
-        },
-        createdAt: serverTimestamp()
-    }
 
-    addDoc(myCollection, myDocumentData).then((newDocRef) => {
-        console.log('New document added with ID:', newDocRef.id);
-    }).catch((error) => {
-        console.error('Error adding document: ', error);
-    });
-}
-// Hapus data 
-document.addEventListener('DOMContentLoaded', async () => {
-    const userTable = document.getElementById('userTable').getElementsByTagName('tbody')[0];
-    
+document.addEventListener("DOMContentLoaded", async () => {
+    const userTable = document.getElementById("userTableBody");
+
     const querySnapshot = await getDocs(collection(db, "user"));
-    querySnapshot.forEach((doc) => {
+
+    querySnapshot.forEach(doc => {
         const userData = doc.data();
+        console.log(userData);
         const row = userTable.insertRow();
-        
-        const cellUsername = row.insertCell(0);
-        const cellPassword = row.insertCell(1);
-        const cellActions = row.insertCell(2);
-        
-        cellUsername.innerText = userData.username;
-        cellPassword.innerText = userData.email;
+        const uid = row.insertCell(0);
+        const username = row.insertCell(1);
+        const email = row.insertCell(2);
+        const joinDate = row.insertCell(3);
+        const cellActions = row.insertCell(4);
+
+        uid.innerHTML = userData.uid;
+        username.innerHTML = userData.username;
+        email.innerHTML = userData.email;
+        joinDate.innerHTML = new Date(userData.createdAt.toDate()).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
 
         const editButton = document.createElement('button');
+        editButton.id = 'editButton';
+        editButton.className = 'btn btn-warning';
         editButton.innerText = 'Edit';
-        editButton.addEventListener('click', () => editUser(doc.id, userData.username, userData.password));
+        editButton.addEventListener('click', () => editGame(doc.id, gameData));
 
         const deleteButton = document.createElement('button');
+        deleteButton.className = 'btn btn-danger';
+        deleteButton.id = 'deleteButton';
         deleteButton.innerText = 'Delete';
-        deleteButton.addEventListener('click', () => deleteUser(doc.id));
+        deleteButton.addEventListener('click', () => deleteConfirm(doc.id, userData.uid));
+
+        // Append both buttons to the same cell
         cellActions.appendChild(editButton);
         cellActions.appendChild(deleteButton);
     });
+
+   
 });
 
-async function deleteUser(userId) {
-    await deleteDoc(doc(db, "user", userId));
-    location.reload(); // Refresh the page to show updated data
+async function deleteConfirm(userId, uid) {
+    $.confirm({
+        Animation:"scale",
+        title: 'Confirm Delete',
+        content: 'Are you sure you want to delete this user?',
+        buttons: {
+            confirm: {
+                text: 'Yes, delete it',
+                btnClass: 'btn-danger',
+                action: async () => {
+                    await deleteUser(userId, uid);
+                }
+            },
+            cancel: {
+                text: 'No, cancel',
+                btnClass: 'btn-default'
+            }
+        }
+    });
 }
 
-function editUser(userId, username) {
-    const newUsername = prompt("Enter new username:", username);
-    console.log(userId);
-
-    if (newUsername) {
-        updateDoc(doc(db, "user", userId), {
-            username: newUsername,
-        }).then(() => {
-            location.reload(); // Refresh the page to show updated data
-        });
+async function deleteUser(userId, uid) {
+    console.log("path dari user adalah " + userId)
+    console.log("path dari uid user adalah " + uid)
+    try {
+        const userDocRef = doc(db, "user", userId);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+            const userData = userDoc.data();
+            await deleteDoc(userDocRef);
+            location.reload();
+        } else {
+            console.log("No such document!");
+        }
+    } catch (error) {
+        console.error("Error deleting user document: ", error);
     }
 }
 
+function editUser(userId, gameData){
+    console.log("path dari user adalah " + userId)
 
-
+}
