@@ -12,7 +12,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebas
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    
+
 };
 
 // Initialize Firebase

@@ -1,0 +1,241 @@
+body {
+    background-color: #131313;
+  }
+  
+  h3 {
+    margin-top: 70px;
+    margin-bottom: 30px;
+    color: white;
+  }
+  
+  
+  h1, h2, h3, h4, h5, p{
+    color: white;
+  }
+  
+  @media (max-width: 767px) {
+    .form-container {
+        width: 90%;
+    }
+}
+
+tbody tr:hover {
+    background-color: #131313;
+    cursor: pointer;
+}
+
+.content {
+margin-left: 200px;
+padding: 20px;
+}
+  
+  /* Carousel */
+  .tawaran h2{
+    margin-bottom: 25px;
+  }
+  
+  .carousel {
+      width: auto;
+      height: auto;
+  
+  }
+  .carousel-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+  }
+  .carousel-item {
+      width: 100%;
+      height: 100%;
+  }
+  .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+  }
+  
+  .carouseltitle{
+      text-align: center;
+      font-size: x-large;
+  }
+  
+  .backg {
+      margin-top: 90px;
+      width: 100%;
+  }
+  
+  .container {
+      white-space: wrap;
+      width: 100%;
+      margin-top: 100px;
+      flex-direction:row;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .container img {
+      display: inline-block;
+      padding: 5px;
+      height: 300px;
+      width: 200px;
+      border-radius: 30px;
+      object-fit: cover;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .container img {
+      height: 200px;
+      width: 150px;
+      }
+    }
+  
+      
+  
+    /* sidebar */
+    .sidebar {
+      height: 100%;
+      width: 190px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #1e1e1e;
+      overflow-x: hidden;
+      padding-top: 20px;
+      border-radius: 15px;
+    }
+    
+    .sidebar a {
+      padding: 20px 20px 20px 20px;
+      text-decoration: none;
+      font-size: 20px;
+      color: #818181;
+      display: block;
+    }
+    
+    .sidebar a:hover {
+      color: #dadada;
+    }
+    
+    .sidebar a.active {
+      background-color: #969696;
+      color: white;
+      border-radius: 15px;
+    }
+    
+    .content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+  
+    /* Responsive Sidebar */
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      padding-top: 50px;
+      height: auto;
+      position: relative;
+      border-radius: 0;
+    }
+  
+    .sidebar a {
+      padding: 10px;
+    }
+  
+    .content {
+      margin-left: 0;
+    }
+  }
+
+  .links .garis-horizontal {
+    border-bottom: 3px solid red;
+  }
+
+  .garis-horizontal {
+    border-bottom: 1.5px solid rgb(142, 142, 142);
+  }
+  
+
+/* Navbar */
+.navbar-brand img{
+    width: 100px;
+    height: 50px;
+}
+.navbar .bg-dark .navbar-expand-lg .bg-body-tertiary .sticky-sm-top {
+    background-color: #131313;
+}
+
+.table-dark{
+    width: 1100px;
+}
+
+.table-dark th, td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.card{
+    border: none;
+    background-color: #3a3a3a;
+  }
+  
+.card-header{
+    margin: 10px;
+    border-bottom-color: #1c1c1c;
+    border-bottom-width: 3px;
+}
+
+@media (max-width: 1298px) {
+.table-dark {
+    width: 100%;
+}
+}
+
+.w-full {
+    background-color: #131313;
+}
+
+#gameForm {
+    background-color: #1c1c1c;
+}
+
+  input::placeholder {
+    color: white;
+  }
+
+  .mb-4 input[type="date"] {
+    color: white;
+    background-image: 
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' fill='%23ffffff'%3E%3Cpath d='M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z'/%3E%3C/svg%3E"),
+      url("https://www.w3.org/2000/svg#calendar");
+    background-repeat: no-repeat;
+    background-position: right 1rem center, right 1rem center;
+    background-size: 1.5em 1.5em, 1.5em 1.5em;
+    padding-right: 2px;
+  }
+
+  .input-group .form-control[type="file"] {
+    background-color: #131313;
+  }
+
+  .btn-close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .btn-close svg {
+    transition: transform 0.3s ease;
+  }
+  
+  .btn-close:hover svg {
+    transform: rotate(90deg);
+  }
+
+  
