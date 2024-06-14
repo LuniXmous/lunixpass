@@ -57,11 +57,9 @@
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-
+        import {firebaseConfig } from "./js/key.js";
         // Your web app's Firebase configuration
-        const firebaseConfig = {
-            
-        };
+        
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);

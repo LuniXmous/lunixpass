@@ -1,11 +1,8 @@
 // Import Firebase modules and initialize Firestore
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-
-const firebaseConfig = {
-
-};
+import { firebaseConfig } from "./key.js";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -37,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cellReleaseDate.innerText = gameData.game_detail.release_date;
         cellSize.innerText = gameData.game_detail.size + " GB";
         cellGenre.innerText = gameData.genre.join(", ");
-        cellImage.innerHTML = `<img src="${gameData.game_image}" alt="${gameData.game_name}" width="50">`;
+        cellImage.innerHTML = `<img src="${gameData.game_image}" alt="${gameData.game_name}" width="100">`;
 
         const editButton = document.createElement('button');
         editButton.id = 'editButton';
