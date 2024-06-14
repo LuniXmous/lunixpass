@@ -18,27 +18,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         const uid = row.insertCell(0);
         const cellImage = row.insertCell(1);
         const cellName = row.insertCell(2);
-        const cellDesc = row.insertCell(3);
-        const cellPublisher = row.insertCell(4);
-        const cellReleaseDate = row.insertCell(5);
-        const cellSize = row.insertCell(6);
-        const cellGenre = row.insertCell(7);
-        const cellTier = row.insertCell(8);
-        const cellActions = row.insertCell(9);
+        const cellTier = row.insertCell(3);
+        const cellActions = row.insertCell(4);
         uid.innerText = doc.id;
         cellTier.style.textAlign = 'center';
         cellTier.innerText = gameData.game_tier;
         cellName.innerText = gameData.game_name;
-        cellDesc.innerText = gameData.game_desc;
-        cellPublisher.innerText = gameData.game_detail.publisher;
-        cellReleaseDate.innerText = gameData.game_detail.release_date;
-        cellSize.innerText = gameData.game_detail.size + " GB";
-        cellGenre.innerText = gameData.genre.join(", ");
         cellImage.innerHTML = `<img src="${gameData.game_image}" alt="${gameData.game_name}" width="100">`;
 
         const editButton = document.createElement('button');
         editButton.id = 'editButton';
-        editButton.className = 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded';
+        editButton.className = 'btn btn-warning me-2';
         editButton.innerText = 'Edit';
         editButton.addEventListener('click', () =>  {
           const editModal = document.getElementById('editModal');
@@ -55,14 +45,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             modal.classList.add('hidden');
         });
         });
+        const viewButton = document.createElement('button');
+        viewButton.className = 'btn btn-primary me-2';
+        viewButton.id = 'viewButton';
+        viewButton.innerText = 'View';
+        viewButton.addEventListener('click', () => viewGame(doc.id, gameData));
 
         const deleteButton = document.createElement('button');
-        deleteButton.className = 'bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-1 rounded';
+        deleteButton.className = 'btn btn-danger me-2';
         deleteButton.id = 'deleteButton';
         deleteButton.innerText = 'Delete';
-        deleteButton.addEventListener('click', () => deleteGame(doc.id));
+        deleteButton.addEventListener('click', () => deleteConfirm(doc.id));
 
         // Append both buttons to the same cell
+        cellActions.appendChild(viewButton);
         cellActions.appendChild(editButton);
         cellActions.appendChild(deleteButton);
     });
@@ -103,7 +99,30 @@ document.getElementById('gameForm').addEventListener('submit', async (e) => {
         alert('Error adding data. Please try again.');
     }
 });
-
+async function deleteConfirm(gameId, uid) {
+    $.confirm({
+        type: 'red',
+        theme: 'material',
+        theme: "dark",
+        Animation: "scale",
+        icon: 'fa fa-warning',
+        title: 'Confirm Delete',
+        content: 'Are you sure you want to delete this game?',
+        buttons: {
+            confirm: {
+                text: 'Yes, delete it',
+                btnClass: 'btn-danger',
+                action: async () => {
+                    await deleteGame(gameId);
+                }
+            },
+            cancel: {
+                text: 'No, cancel',
+                btnClass: 'btn-default'
+            }
+        }
+    });
+}
 async function deleteGame(gameId) {
     try {
         console.log(gameId)
@@ -143,20 +162,14 @@ function editGame(gameId, gameData) {
     document.getElementById('edit_genre').value = gameData.genre.join(', ');
     document.getElementById('edit_game_image').value = gameData.game_image;
 
-    openModal();
+    $(editModal).modal("toggle")
 }
 
 const editModal = document.getElementById('editModal');
 
 const saveChangesButton = document.getElementById('saveChanges');
 
-function openModal() {
-    editModal.classList.remove('hidden');
-}
 
-function closeModal() {
-    editModal.classList.add('hidden');
-}
 
 
 saveChangesButton.addEventListener('click', async () => {
@@ -181,9 +194,33 @@ saveChangesButton.addEventListener('click', async () => {
             genre: newGenre,
             game_image: newGameImage
         });
-        location.reload(); // Refresh the page to show updated data
+        $("editModal").modal("hide");
+        $.alert({
+            theme: 'dark',
+            title: 'Notifications',
+            content: 'Data Updated',
+            onClose: function () {
+                location.reload();
+            }
+        });
     }
 
-    closeModal();
 });
 
+
+async function viewGame(gameId, gameData) {
+    // document.getElementById('edit_game_id').value = gameId;
+    document.getElementById('viewGameModalLabel').innerHTML = gameData.game_name;
+    document.getElementById('view_image').src = gameData.game_image;
+    document.getElementById('view_deskripsi').innerHTML = gameData.game_desc;
+    document.getElementById('view_publisher').innerHTML = gameData.game_detail.publisher 
+    document.getElementById('view_release_date').innerHTML = "Release Date : "+ gameData.game_detail.release_date;
+    document.getElementById('view_size').innerHTML = "Size : "+ gameData.game_detail.size + " GB";
+    document.getElementById('view_genre').innerHTML = gameData.genre.join(', ');
+    document.getElementById('view_id').innerHTML = "Game ID : "+gameId
+
+
+    $("#viewGameModal").modal("toggle");
+
+
+}

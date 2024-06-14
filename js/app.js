@@ -31,20 +31,26 @@ document.addEventListener("DOMContentLoaded", async () => {
             month: '2-digit',
             year: 'numeric'
         });
+        const viewButton = document.createElement('button');
+        viewButton.id = 'viewButton';
+        viewButton.className = 'btn btn-primary me-2';
+        viewButton.innerText = 'View';
+        viewButton.addEventListener('click', () => viewUser(doc.id,userData));
 
         const editButton = document.createElement('button');
         editButton.id = 'editButton';
-        editButton.className = 'btn btn-warning';
+        editButton.className = 'btn btn-warning me-2';
         editButton.innerText = 'Edit';
         editButton.addEventListener('click', () => editUser(doc.id, userData));
 
         const deleteButton = document.createElement('button');
-        deleteButton.className = 'btn btn-danger';
+        deleteButton.className = 'btn btn-danger me-2';
         deleteButton.id = 'deleteButton';
         deleteButton.innerText = 'Delete';
         deleteButton.addEventListener('click', () => deleteConfirm(doc.id, userData.uid));
 
         // Append both buttons to the same cell
+        cellActions.appendChild(viewButton);
         cellActions.appendChild(editButton);
         cellActions.appendChild(deleteButton);
     });
@@ -52,9 +58,36 @@ document.addEventListener("DOMContentLoaded", async () => {
    
 });
 
+async function viewUser(id, userData) {
+    console.log(userData.statistic.achievement);
+    const formatDate = (dateStr) => {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateStr).toLocaleDateString(undefined, options);
+    };
+    document.getElementById("viewUserModalLabel").innerHTML = userData.username+ "'s Profile";
+    document.getElementById("view_email").innerHTML = "Email : "+userData.email;
+    document.getElementById("view_username").innerHTML = "Username : "+userData.username;
+    document.getElementById("view_id").innerHTML = "UID : "+userData.uid;
+    document.getElementById("view_statistic").innerHTML = "Game Achievement :  "+userData.statistic.achievement;
+    document.getElementById("view_game_time").innerHTML = "Hours Played : "+userData.statistic.game_time;
+    document.getElementById("view_subs_type").innerHTML = "Subscription Type : "+userData.subscription.subs_type;
+    document.getElementById("view_subs_start_date").innerHTML = "Subscription Start Date : "+userData.subscription.subs_start_date;
+    document.getElementById("view_subs_end_date").innerHTML = "Subscription End Date : "+userData.subscription.subs_end_date;
+    document.getElementById("view_joined_at").innerHTML = "Joined At : "+formatDate(userData.createdAt.toDate());
+
+
+$("#viewUserModal").modal("toggle")
+
+}
+
 async function deleteConfirm(userId, uid) {
     $.confirm({
         Animation:"scale",
+        theme: 'material',
+        animationSpeed: 500,
+        theme: 'dark',
+        type: 'red',
+        icon: 'fa fa-trash',
         title: 'Confirm Delete',
         content: 'Are you sure you want to delete this user?',
         buttons: {
@@ -80,7 +113,14 @@ async function deleteUser(userId, uid) {
         if (userDoc.exists()) {
             const userData = userDoc.data();
             await deleteDoc(userDocRef);
-            location.reload();
+            $.alert({
+                type: 'green',
+                icon: 'fa fa-check',
+                theme: 'material',
+                theme: "dark",
+                title: 'Success',
+                content: 'User deleted successfully!',
+            })
         } else {
             console.log("No such document!");
         }
@@ -131,7 +171,19 @@ if(newUsername && newAchievement && newGameTime && newSubsStartDate && newSubsEn
         subs_type : newTier,
         }
     });
-    location.reload();
+    $.alert({
+        title: 'Success',
+        theme: 'material',
+        animation: 'scale',
+        type: 'green',
+        icon: 'fa fa-check',
+        theme: 'dark',
+        content: 'User updated successfully',
+        onClose: function () {
+            location.reload();
+        }
+    })
+
 }
 closeModal();
 

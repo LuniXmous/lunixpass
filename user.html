@@ -14,7 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
     crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
   <script src="js/thumbnail.js"></script>
   <script src="js/app.js" type="module"></script>
@@ -28,8 +28,8 @@
     <a href="dashboard.html">
       <i class="fa-solid fa-house"></i> Dashboard</a>
     <a class="active" href="user.html"><i class="fa-regular fa-user"></i> User</a>
-    <a href="game/index.html"><i class="fa-solid fa-gamepad"></i> Game</a>
-    <a href="subscribe.html"> <i class="fa-solid fa-subscript"></i> Subscription</a>
+    <a href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
+    <a href="news.html"> <i class="fa-solid fa-newspaper"></i> News</a>
   </div>
   <div class="content">
     <div class="container-fluid">
@@ -164,6 +164,42 @@
     </div>
   </div>
 
+  <div class="modal fade" id="viewUserModal" tabindex="-1" aria-labelledby="viewUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #1c1c1c;">
+          <h5 class="modal-title" id="viewUserModalLabel">Update User</h5>
+          <button type="button" class="btn-close btn btn-danger" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-light" style="background-color: #1c1c1c;">
+
+            <div class="mb-3">
+              <p class="text-center">User Information</p>
+              <p id="view_username">Username</p>
+              <p id="view_email">email</p>
+              <p id="view_id"></p>
+              <p id="view_joined_at"></p>
+            </div>
+            <div class="mb-3">
+              <p class="text-center">Statistic</p>
+              <p id="view_statistic"></p>
+              <p id="view_game_time"></p>
+            </div>
+            <div class="mb-3">
+              <p class="text-center">Subscription</p>
+              <p id="view_subs_type">Tier</p>
+              <p id="view_subs_start_date">Start Date</p>
+              <p id="view_subs_end_date">End Date</p>
+            </div>
+
+
+        </div>
+        <div class="modal-footer" style="background-color: #1c1c1c;">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script>
     function jumpToBottom() {
       const infoSection = document.querySelector('#option');
