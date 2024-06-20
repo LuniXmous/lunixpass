@@ -11,7 +11,12 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
         crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
     <link rel="stylesheet" href="css/Stylesheet.css">
+    <script type="module" src="js/login.js"></script>
     <title>LuniXpass</title>
 </head>
 
@@ -45,26 +50,7 @@
             </div>
         </div>
     </div>
-    
-    <script>
-       document.getElementById("loginForm").addEventListener("submit", function(event){
-           event.preventDefault(); 
-           console.log("Form submission attempted."); 
-           var email = document.getElementById("exampleInputEmail1").value;
-           var password = document.getElementById("exampleInputPassword1").value;
-        //    console.log(email);
-        //    console.log(password);
-           const testemail = "sain@mail.com";
-           const testpass = "123";
-            
-           if (email == testemail && password == testpass) {
-               alert("Logged In!")
-               window.location.href = "homepage.html";
-           } else {
-            alert("username or password are incorrect!")
-           }
-       });
-    </script>
+
 </body>
 
 </html>

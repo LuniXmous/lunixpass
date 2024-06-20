@@ -7,7 +7,7 @@ import { firebaseConfig } from "./key.js";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
-
+// read data pas webnya loading
 document.addEventListener('DOMContentLoaded', async () => {
     const gameTable = document.getElementById('gameTable').getElementsByTagName('tbody')[0];
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         cellActions.appendChild(deleteButton);
     });
 });
-
+// isi form buat nambahin game baru
 document.getElementById('gameForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const gameName = document.getElementById('game_name').value;

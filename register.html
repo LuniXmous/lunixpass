@@ -11,7 +11,12 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
     <script src="js/thumbnail.js"></script>
+    <script type="module" src="js/register.js"></script>
 
     <link rel="stylesheet" href="css/Stylesheet.css">
     <title>LuniXpass</title>
@@ -43,107 +48,17 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
-                    <center><button type="submit" id="submit" class="btn btn-primary">Submit</button></center>
+                    <center><button type="submit" id="submit" class="btn btn-primary" >Submit</button></center>
+                    
                 </form>
                 <div class="forgot-password" style="margin-top: 30px;">
-                    <a href="login.html">Already Have Account?</a>
+                    <a href="login.html">Already Have Account?</a><br>
+                   
                 </div>
             </div>
         </div>
     </div>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
-        import {firebaseConfig } from "./js/key.js";
-        // Your web app's Firebase configuration
-        
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        document.getElementById('registrationForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            var usernameInput = document.getElementById('exampleInputUsername1');
-            var emailInput = document.getElementById('exampleInputEmail1');
-            var passwordInput = document.getElementById('exampleInputPassword1');
-            var usernameError = document.getElementById('usernameError');
-            var emailError = document.getElementById('emailError');
-            var passwordError = document.getElementById('passwordError');
-            var isValid = true;
-
-            // Validasi username
-            if (usernameInput.value.trim() === '') {
-                usernameError.textContent = 'Username is required';
-                isValid = false;
-            } else {
-                usernameError.textContent = '';
-            }
-
-            // Validasi email
-            if (emailInput.value.trim() === '') {
-                emailError.textContent = 'Email is required';
-                isValid = false;
-            } else if (!isValidEmail(emailInput.value.trim())) {
-                emailError.textContent = 'Invalid email format';
-                isValid = false;
-            } else {
-                emailError.textContent = '';
-            }
-
-            // Validasi password
-            if (passwordInput.value.trim() === '') {
-                passwordError.textContent = 'Password is required';
-                isValid = false;
-            } else {
-                passwordError.textContent = '';
-            }
-
-            if (isValid) {
-                try {
-                    const userCredential = await createUserWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value.trim());
-                    const user = userCredential.user;
-
-                    await addDoc(collection(db, "user"), {
-                        uid: user.uid,
-                        username: usernameInput.value.trim(),
-                        email: emailInput.value.trim(),
-                        subscription: {
-                            subs_start_date: 0,
-                            subs_type: 0,
-                            subs_end_date: 0,
-                            subs_status: false
-                        },
-                        statistic: {
-                            achievement: "0",
-                            game_owned: "0",
-                            game_time: "0"
-                        },
-                        createdAt: serverTimestamp()
-                    });
-
-                    alert("Successfully registered!");
-                } catch (error) {
-                    if (error.code === 'auth/email-already-in-use') {
-                        alert('The email address is already in use by another account.');
-                    } else {
-                        console.error("Error adding document: ", error);
-                    }
-                }
-            }
-        });
-
-        function isValidEmail(email) {
-            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-    </script>
 </body>
 
 </html>
