@@ -15,15 +15,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     querySnapshot.forEach(doc => {
         const userData = doc.data();
-
+        console.log(userData.subscription.subs_start_date);
         const row = userTable.insertRow();
-        const uid = row.insertCell(0);
-        const username = row.insertCell(1);
-        const email = row.insertCell(2);
-        const joinDate = row.insertCell(3);
-        const cellActions = row.insertCell(4);
+        row.setAttribute("class", "row-sm-12")
+        const username = row.insertCell(0);
+        const email = row.insertCell(1);
+        const joinDate = row.insertCell(2);
+        const cellActions = row.insertCell(3);
 
-        uid.innerHTML = userData.uid;
         username.innerHTML = userData.username;
         email.innerHTML = userData.email;
         joinDate.innerHTML = new Date(userData.createdAt.toDate()).toLocaleDateString('en-GB', {
@@ -33,23 +32,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
         const viewButton = document.createElement('button');
         viewButton.id = 'viewButton';
-        viewButton.className = 'btn btn-primary me-2';
-        viewButton.innerText = 'View';
+        viewButton.className = 'btn btn-primary me-2 ';
+        viewButton.innerHTML = '<i class="fa fa-eye"></i><span class="ms-1">View</span>';
         viewButton.addEventListener('click', () => viewUser(doc.id,userData));
 
         const editButton = document.createElement('button');
         editButton.id = 'editButton';
         editButton.className = 'btn btn-warning me-2';
-        editButton.innerText = 'Edit';
+        editButton.innerHTML = '<i class="fa fa-edit"></i><span class="ms-1">Edit</span>';
         editButton.addEventListener('click', () => editUser(doc.id, userData));
 
         const deleteButton = document.createElement('button');
-        deleteButton.className = 'btn btn-danger me-2';
         deleteButton.id = 'deleteButton';
-        deleteButton.innerText = 'Delete';
+        deleteButton.className = 'btn btn-danger';
+        deleteButton.innerHTML = '<i class="fa fa-trash"></i><span class="ms-1">Delete</span>';
         deleteButton.addEventListener('click', () => deleteConfirm(doc.id, userData.uid));
 
-        // Append both buttons to the same cell
+
+        cellActions.setAttribute("class", "");
         cellActions.appendChild(viewButton);
         cellActions.appendChild(editButton);
         cellActions.appendChild(deleteButton);

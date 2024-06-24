@@ -72,15 +72,67 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     } catch (error) {
         if (error.code === 'auth/wrong-password') {
-            alert('Incorrect password.');
+            $.alert({
+                title : "Login Failed",
+                content : "Incorrect Password",
+                theme : "dark",
+                type : "red",
+                icon : "fa fa-exclamation-triangle"
+            })
         } else if (error.code === 'auth/user-not-found') {
-            alert('No user found with this email.');
-        } else {
-            console.error("Error logging in: ", error);
+            $.alert({
+                title: 'Login Failed',
+                content: 'User not found.',
+                theme: 'dark',
+                type: 'red',
+                icon: 'fa fa-exclamation-triangle'
+            })
+        } 
+        else if (error.code === 'auth/invalid-credential') {
+            $.alert({
+                title: 'Login Failed',
+                theme: 'dark',
+                type: 'red',
+                icon: 'fa fa-exclamation-triangle',
+                content: 'Invalid credentials Incorrect Password or Email',
+            })
+        }
+         else {
+            $.alert({
+                content: error.code,
+                icon: 'fa fa-exclamation-triangle',
+                type: 'red',
+                theme : 'dark',
+                title: 'Login Failed'})
         }
     }
 });
+ async function logout(){
+    try {
+        $.confirm({
+            icon:"fa fa-warning",
+            title: 'Logout',
+            content: 'Are You Sure?',
+            theme: 'supervan',
+            buttons: {
+                confirm: function () {
+                    sessionStorage.removeItem('userID');
+                    signOut(auth).then(() => {
+                        window.location.href = 'login.html';
+                    }).catch((error) => {
+                        console.error("Error signing out:", error);
+                    });
+                },
+                cancel: function () {
+                   
+                }
+            }
+        })
 
+    } catch (error) {
+        console.error("Error signing out:", error);
+    }
+ }
 // Logout function
 // document.getElementById("logoutButton").addEventListener("click", async function () {
 //     try {

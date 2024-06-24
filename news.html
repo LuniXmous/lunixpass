@@ -12,19 +12,59 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
     <script src="thumbnail.js"></script>
+    <!-- GCP Module -->
+    <script type="module" th:src="@{/js/news.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/Stylesheet.css}">
+    <!-- Local Module -->
     <link rel="stylesheet" href="css/Stylesheet.css">
     <script type="module" src="js/news.js"></script>
     <title>News</title>
 </head>
 <body>
-    <div class="sidebar">
-        <a class="navbar-brand" href="index.html"><img src="media/LuniXpass-removebgpng.png" alt="img"></a>
-        <a href="dashboard.html">
-            <i class="fa-solid fa-house"></i> Dashboard</a>
-        <a href="user.html"><i class="fa-regular fa-user"></i> User</a>
-        <a href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
-        <a class="active" href="#"><i class="fa-solid fa-newspaper"></i> News</a>       
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="navAdmin">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img th:src="@{/img/LuniXpass-removebgpng.png}" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/admin/">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/user">
+              <i class="fa-regular fa-user"></i> User
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/game">
+              <i class="fa-solid fa-gamepad"></i> Game
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/news">
+              <i class="fa-solid fa-newspaper"></i> news
+            </a>
+          </li>
+
+        </ul>
+        </div>
     </div>
+</nav>
+<div class=" sidebar">
+              <a class="navbar-brand" href="/"><img th:src="@{/img/LuniXpass-removebgpng.png}" alt="img"></a>
+              <a class="" href="/admin/">
+                <i class="fa-solid fa-house"></i> Dashboard</a>
+              <a href="/admin/user"><i class="fa-regular fa-user"></i> User</a>
+              <a class="" href="/admin/game"><i class="fa-solid fa-gamepad"></i> Game</a>
+              <a class="active" href="/admin/news"><i class="fa-solid fa-newspaper"></i> News</a>
+      </div>
         <div class="content">
             <div class="container-fluid" >
                 <div class="d-sm-flex align-items-center justify-content-between" style="margin-bottom: 40px;">

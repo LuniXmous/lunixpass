@@ -24,37 +24,37 @@ document.addEventListener('DOMContentLoaded', async () => {
         cellTier.style.textAlign = 'center';
         cellTier.innerText = gameData.game_tier;
         cellName.innerText = gameData.game_name;
-        cellImage.innerHTML = `<img src="${gameData.game_image}" alt="${gameData.game_name}" width="100">`;
+        cellImage.innerHTML = `<img id= "gameImage" src="${gameData.game_image}" alt="${gameData.game_name}" width="100">`;
 
         const editButton = document.createElement('button');
+        
+        const modal = document.getElementById('editModal');
+        const closeButtons = document.querySelectorAll('.btn-close');
+        
+        // Add a click event listener to each close button
+        closeButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                modal.classList.add('hidden');
+            });
+        });
         editButton.id = 'editButton';
         editButton.className = 'btn btn-warning me-2';
-        editButton.innerText = 'Edit';
+        editButton.innerHTML = '<i class="fa fa-edit"></i><span class="ms-1">Edit</span>';
         editButton.addEventListener('click', () =>  {
           const editModal = document.getElementById('editModal');
           editModal.classList.remove('hidden');
           editGame(doc.id, gameData);
         });
-        
-        const modal = document.getElementById('editModal');
-        const closeButtons = document.querySelectorAll('.btn-close');
-
-        // Add a click event listener to each close button
-        closeButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
-        });
         const viewButton = document.createElement('button');
         viewButton.className = 'btn btn-primary me-2';
         viewButton.id = 'viewButton';
-        viewButton.innerText = 'View';
+        viewButton.innerHTML = '<i class="fa fa-eye"></i><span class="ms-1">View</span>';
         viewButton.addEventListener('click', () => viewGame(doc.id, gameData));
 
         const deleteButton = document.createElement('button');
         deleteButton.className = 'btn btn-danger me-2';
         deleteButton.id = 'deleteButton';
-        deleteButton.innerText = 'Delete';
+        deleteButton.innerHTML = '<i class="fa fa-trash"></i><span class="ms-1">Delete</span>';
         deleteButton.addEventListener('click', () => deleteConfirm(doc.id));
 
         // Append both buttons to the same cell
