@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+  integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.4/jquery-confirm.min.js"></script>
+  <script src="thumbnail.js"></script>
+  <!-- GCP Module -->
+  <script type="module" th:src="@{/js/game.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/Stylesheet.css}">
+  <!-- Local Module -->
+  <script type="module" src="js/approval.js"></script>
+  <link rel="stylesheet" href="css/Stylesheet.css">
+  <title>Add Game</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="navAdmin">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <img th:src="@{/img/LuniXpass-removebgpng.png}" alt="Logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/admin/">
+              <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/user">
+              <i class="fa-regular fa-user"></i> User
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/game">
+              <i class="fa-solid fa-gamepad"></i> Game
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/news">
+              <i class="fa-solid fa-newspaper"></i> news
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/admin/news">
+              <i class="fa-solid fa-check"></i> news
+            </a>
+          </li>
+        </ul>
+        </div>
+    </div>
+</nav>
+<div class="sidebar">
+  <a class="navbar-brand" href="/"><img th:src="@{/img/LuniXpass-removebgpng.png}" alt="img"></a>
+  <a class="" href="/admin/">
+    <i class="fa-solid fa-house"></i> Dashboard</a>
+  <a href="/admin/user"><i class="fa-regular fa-user"></i> User</a>
+  <a class="" href="/admin/game"><i class="fa-solid fa-gamepad"></i> Game</a>
+  <a class="active" href="/admin/approval"><i class="fa-solid fa-check"></i> Approval</a>
+  <a class="" href="/admin/news"><i class="fa-solid fa-newspaper"></i> News</a>
+</div>
+<div class="content">
+  <div class="d-sm-flex align-items-center justify-content-between" style="margin-bottom: 40px;">
+    <h1 class="h1 mb-0 text-light"><i class="fa-solid fa-gamepad"></i> Game </h1>
+  </div>
+  <div class="garis-horizontal" style="margin-bottom: 30px;"></div>
+
+  <div class="row">
+    <div class="card shadow mb-4">
+      <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+        <h3 class="m-2 font-weight-bold">Waiting For Approval</h3>
+      </div>
+      <div class="card-body">
+        <div class="chart-area">
+          <table id="ApprovalTable" class="table-dark table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Transaction Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Prove Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Game data will be appended here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+
+</html>

@@ -21,7 +21,7 @@
   <script type="module" th:src="@{/js/game.js}"></script>
   <link rel="stylesheet" th:href="@{/css/Stylesheet.css}">
   <!-- Local Module -->
-  <script type="module" src="../js/game.js"></script>
+  <script type="module" src="js/game.js"></script>
   <link rel="stylesheet" href="css/Stylesheet.css">
   <title>Add Game</title>
 </head>
@@ -213,7 +213,11 @@
                     </div>
                     <div class="mb-3">
                       <label for="edit_game_image" class="form-label">Image URL</label>
-                      <input type="text" class="form-control" id="edit_game_image" placeholder="Image URL" required>
+                      <input type="text" class="form-control" id="edit_game_image" placeholder="Image URL" disabled>
+                    </div>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" role="switch" id="recommend">
+                      <label class="form-check-label" for="recommend">is Game Recommended?</label>
                     </div>
                     <input type="hidden" id="edit_game_id">
                   </form>

@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc , Timestamp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
-import {firebaseConfig } from "./key.js"
+import { firebaseConfig } from "./key.js"
 
 
 // Initialize Firebase
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     querySnapshot.forEach(doc => {
         const userData = doc.data();
-        console.log(userData.subscription.subs_start_date);
+
         const row = userTable.insertRow();
         row.setAttribute("class", "row-sm-12")
         const username = row.insertCell(0);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         viewButton.id = 'viewButton';
         viewButton.className = 'btn btn-primary me-2 ';
         viewButton.innerHTML = '<i class="fa fa-eye"></i><span class="ms-1">View</span>';
-        viewButton.addEventListener('click', () => viewUser(doc.id,userData));
+        viewButton.addEventListener('click', () => viewUser(doc.id, userData));
 
         const editButton = document.createElement('button');
         editButton.id = 'editButton';
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         cellActions.appendChild(deleteButton);
     });
 
-   
+
 });
 
 async function viewUser(id, userData) {
@@ -64,25 +64,44 @@ async function viewUser(id, userData) {
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
         return new Date(dateStr).toLocaleDateString(undefined, options);
     };
-    document.getElementById("viewUserModalLabel").innerHTML = userData.username+ "'s Profile";
-    document.getElementById("view_email").innerHTML = "Email : "+userData.email;
-    document.getElementById("view_username").innerHTML = "Username : "+userData.username;
-    document.getElementById("view_id").innerHTML = "UID : "+userData.uid;
-    document.getElementById("view_statistic").innerHTML = "Game Achievement :  "+userData.statistic.achievement;
-    document.getElementById("view_game_time").innerHTML = "Hours Played : "+userData.statistic.game_time;
-    document.getElementById("view_subs_type").innerHTML = "Subscription Type : "+userData.subscription.subs_type;
-    document.getElementById("view_subs_start_date").innerHTML = "Subscription Start Date : "+userData.subscription.subs_start_date;
-    document.getElementById("view_subs_end_date").innerHTML = "Subscription End Date : "+userData.subscription.subs_end_date;
-    document.getElementById("view_joined_at").innerHTML = "Joined At : "+formatDate(userData.createdAt.toDate());
+    document.getElementById("viewUserModalLabel").innerHTML = userData.username + "'s Profile";
+    if(userData.image){
+        document.getElementById("view_image").src = userData.image;
+    }else {
+        document.getElementById("view_image").src = "https://firebasestorage.googleapis.com/v0/b/quiet-biplane-423907-k3.appspot.com/o/profile%2Fdefault.png?alt=media&token=68f08336-7d84-4a3c-8079-3851caf62768"
+    }
+    document.getElementById("view_email").innerHTML = "Email : " + userData.email;
+    document.getElementById("view_username").innerHTML = "Username : " + userData.username;
+    document.getElementById("view_id").innerHTML = "UID : " + userData.uid;
+    document.getElementById("view_statistic").innerHTML = "Game Achievement :  " + userData.statistic.achievement;
+    document.getElementById("view_game_time").innerHTML = "Hours Played : " + userData.statistic.game_time;
+    if (userData.subscription) {
+        document.getElementById("view_subs_status").innerHTML = `Subscription Status : ${userData.subscription.status ? "Non Active" : "Active"}`
+        document.getElementById("view_subs_start_date").innerHTML = "Subscription Start Date : " + userData.subscription.subs_start_date.toDate().toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });;
+            document.getElementById("view_subs_end_date").innerHTML = "Subscription End Date : " + userData.subscription.subs_end_date.toDate().toLocaleDateString('en-GB', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });;
+    } else {
+        document.getElementById("view_subs_status").innerHTML = "Subscription Status : Not Active"
+        document.getElementById("view_subs_start_date").innerHTML = "Subscription Start Date : Not Subcribing"
+        document.getElementById("view_subs_end_date").innerHTML = "Subscription End Date : Not Subcribing"
+    }
+    document.getElementById("view_joined_at").innerHTML = "Joined At : " + formatDate(userData.createdAt.toDate());
 
 
-$("#viewUserModal").modal("toggle")
+    $("#viewUserModal").modal("toggle")
 
 }
 
 async function deleteConfirm(userId, uid) {
     $.confirm({
-        Animation:"scale",
+        Animation: "scale",
         theme: 'material',
         animationSpeed: 500,
         theme: 'dark',
@@ -129,11 +148,11 @@ async function deleteUser(userId, uid) {
     }
 }
 
-function openModal(){
+function openModal() {
     $("#updateUserModal").modal("toggle")
 
 }
-function closeModal(){
+function closeModal() {
     $('#updateUserModal').modal("hide");
 }
 function editUser(userId, userData) {
@@ -141,9 +160,6 @@ function editUser(userId, userData) {
     document.getElementById("updateUsername").value = userData.username;
     document.getElementById("updateAchievement").value = userData.statistic.achievement;
     document.getElementById("updateGameTime").value = userData.statistic.game_time;
-    document.getElementById("updateSubsDate").value = userData.subscription.subs_start_date
-    document.getElementById("updateEndDate").value = userData.subscription.subs_end_date;
-    document.getElementById("updateTier").value = userData.subscription.subs_type;
     document.getElementById("updateUserId").value = userId
 
     openModal();
@@ -151,41 +167,33 @@ function editUser(userId, userData) {
 const saveChangesButton = document.getElementById('saveChange');
 
 saveChangesButton.addEventListener('click', async () => {
-   const id = document.getElementById("updateUserId").value 
-   const newUsername= document.getElementById("updateUsername").value 
-  const newAchievement =  document.getElementById("updateAchievement").value 
-  const newGameTime = document.getElementById("updateGameTime").value 
-  const newSubsStartDate =  document.getElementById("updateSubsDate").value
-   const newSubsEndDate =  document.getElementById("updateEndDate").value 
-   const newTier = document.getElementById("updateTier").value 
-if(newUsername && newAchievement && newGameTime && newSubsStartDate && newSubsEndDate && newTier) {
-    await updateDoc(doc(db,"user", id ), {
-        username : newUsername,
-        statistic : {
-            achievement : newAchievement,
-            game_time : newGameTime
-        },
-        subscription :{
-        subs_start_date : newSubsStartDate,
-        subs_end_date : newSubsEndDate,
-        subs_type : newTier,
-        }
-    });
-    $.alert({
-        title: 'Success',
-        theme: 'material',
-        animation: 'scale',
-        type: 'green',
-        icon: 'fa fa-check',
-        theme: 'dark',
-        content: 'User updated successfully',
-        onClose: function () {
-            location.reload();
-        }
-    })
+    const id = document.getElementById("updateUserId").value
+    const newUsername = document.getElementById("updateUsername").value
+    const newAchievement = document.getElementById("updateAchievement").value
+    const newGameTime = document.getElementById("updateGameTime").value
+    if (newUsername && newAchievement && newGameTime) {
+        await updateDoc(doc(db, "user", id), {
+            username: newUsername,
+            statistic: {
+                achievement: parseInt(newAchievement),
+                game_time: parseInt(newGameTime)
+            },
+        });
+        $.alert({
+            title: 'Success',
+            theme: 'material',
+            animation: 'scale',
+            type: 'green',
+            icon: 'fa fa-check',
+            theme: 'dark',
+            content: 'User updated successfully',
+            onClose: function () {
+                location.reload();
+            }
+        })
 
-}
-closeModal();
+    }
+    closeModal();
 
 
 })

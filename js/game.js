@@ -1,6 +1,6 @@
 // Import Firebase modules and initialize Firestore
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc, } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, addDoc, deleteDoc, updateDoc, getDoc, Timestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 import { firebaseConfig } from "./key.js";
 
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cellActions = row.insertCell(4);
         uid.innerText = doc.id;
         cellTier.style.textAlign = 'center';
-        cellTier.innerText = gameData.game_tier;
+        cellTier.innerText = gameData.isRecommend ? 'Recommended' : 'Not Recommended';
         cellName.innerText = gameData.game_name;
         cellImage.innerHTML = `<img id= "gameImage" src="${gameData.game_image}" alt="${gameData.game_name}" width="100">`;
 
@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // isi form buat nambahin game baru
 document.getElementById('gameForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+
     const gameName = document.getElementById('game_name').value;
     const gameDesc = document.getElementById('game_desc').value;
     const publisher = document.getElementById('publisher').value;
@@ -75,25 +76,30 @@ document.getElementById('gameForm').addEventListener('submit', async (e) => {
     const genre = document.getElementById('genre').value.split(',').map(g => g.trim());
     const gameImage = document.getElementById('game_image').files[0];
 
-    const imageRef = ref(storage, `game_images/${gameName}`);
-    await uploadBytes(imageRef, gameImage);
-    const gameImageUrl = await getDownloadURL(imageRef);
-
     try {
+
+        // Upload game image to Firebase Storage
+        const imageRef = ref(storage, `game_images/${encodeURIComponent(gameName)}`);
+        await uploadBytes(imageRef, gameImage);
+        const gameImageUrl = await getDownloadURL(imageRef);
+
+        // Add game data to Firestore
         await addDoc(collection(db, "game"), {
             game_name: gameName,
             game_desc: gameDesc,
             game_detail: {
                 publisher: publisher,
-                release_date: releaseDate,
+                release_date:Timestamp.fromDate(new Date(releaseDate)), 
                 size: size
             },
             game_tier: gameTier,
             genre: genre,
             game_image: gameImageUrl
         });
+
         alert('Data input successfully!');
-        location.reload(); // Refresh the page to show updated data
+        document.getElementById('gameForm').reset(); // Reset the form
+        location.reload();
     } catch (error) {
         console.error('Error adding document:', error);
         alert('Error adding data. Please try again.');
@@ -152,60 +158,74 @@ async function deleteGame(gameId) {
 }
 
 
+// Assuming you have a function editGame(gameId, gameData) defined
+
 function editGame(gameId, gameData) {
     document.getElementById('edit_game_id').value = gameId;
     document.getElementById('edit_game_name').value = gameData.game_name;
     document.getElementById('edit_game_desc').value = gameData.game_desc;
     document.getElementById('edit_publisher').value = gameData.game_detail.publisher;
-    document.getElementById('edit_release_date').value = gameData.game_detail.release_date;
+    
+    // Convert Firestore Timestamp to JavaScript Date
+    const releaseDate = gameData.game_detail.release_date.toDate();
+    document.getElementById('edit_release_date').value = releaseDate.toISOString().slice(0, 10); // Format as yyyy-mm-dd
+    
     document.getElementById('edit_size').value = gameData.game_detail.size;
     document.getElementById('edit_genre').value = gameData.genre.join(', ');
     document.getElementById('edit_game_image').value = gameData.game_image;
+    document.getElementById('recommend').checked = gameData.isRecommend; 
+    // add if statment if gameData.isRecommend true checkbox is on else off
 
-    $(editModal).modal("toggle")
+    $('#editModal').modal("toggle");
 }
 
-const editModal = document.getElementById('editModal');
-
+// Save changes button event listener
 const saveChangesButton = document.getElementById('saveChanges');
-
-
-
 
 saveChangesButton.addEventListener('click', async () => {
     const gameId = document.getElementById('edit_game_id').value;
     const newGameName = document.getElementById('edit_game_name').value;
     const newGameDesc = document.getElementById('edit_game_desc').value;
     const newPublisher = document.getElementById('edit_publisher').value;
-    const newReleaseDate = document.getElementById('edit_release_date').value;
+    
+    // Parse release date and convert to Firestore Timestamp
+    const newReleaseDate = new Date(document.getElementById('edit_release_date').value);
     const newSize = document.getElementById('edit_size').value;
     const newGenre = document.getElementById('edit_genre').value.split(',').map(g => g.trim());
     const newGameImage = document.getElementById('edit_game_image').value;
-
+    const recommend = document.getElementById("recommend").checked;
+    
     if (newGameName && newGameDesc && newPublisher && newReleaseDate && newSize && newGenre && newGameImage) {
+        
+        // Update Firestore document with new data
         await updateDoc(doc(db, "game", gameId), {
             game_name: newGameName,
             game_desc: newGameDesc,
             game_detail: {
                 publisher: newPublisher,
-                release_date: newReleaseDate,
-                size: newSize
+                release_date: Timestamp.fromDate(newReleaseDate),
+                size: newSize,
+               
             },
+            isRecommend: recommend,
             genre: newGenre,
             game_image: newGameImage
         });
-        $("editModal").modal("hide");
+
+        // Hide modal and show success notification
+        $("#editModal").modal("hide");
         $.alert({
             theme: 'dark',
-            title: 'Notifications',
+            title: 'Notification',
             content: 'Data Updated',
             onClose: function () {
-                location.reload();
+                location.reload(); // Refresh page after update
             }
         });
     }
-
 });
+
+
 
 
 async function viewGame(gameId, gameData) {
@@ -214,7 +234,7 @@ async function viewGame(gameId, gameData) {
     document.getElementById('view_image').src = gameData.game_image;
     document.getElementById('view_deskripsi').innerHTML = gameData.game_desc;
     document.getElementById('view_publisher').innerHTML = gameData.game_detail.publisher 
-    document.getElementById('view_release_date').innerHTML = "Release Date : "+ gameData.game_detail.release_date;
+    document.getElementById('view_release_date').innerHTML = "Release Date : "+ convertDate(gameData.game_detail.release_date.seconds);
     document.getElementById('view_size').innerHTML = "Size : "+ gameData.game_detail.size + " GB";
     document.getElementById('view_genre').innerHTML = gameData.genre.join(', ');
     document.getElementById('view_id').innerHTML = "Game ID : "+gameId
@@ -224,3 +244,15 @@ async function viewGame(gameId, gameData) {
 
 
 }
+
+function convertDate(time) {
+    let dateInMillis = time * 1000
+    let date = new Date(dateInMillis)
+    let myDate = date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        })
+    return myDate
+    }
+ 
